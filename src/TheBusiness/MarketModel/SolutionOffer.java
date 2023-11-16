@@ -15,35 +15,102 @@ import TheBusiness.SolutionOrders.SolutionOrder;
  */
 public class SolutionOffer {
     ArrayList<Product> products;
-    int price;//floor, ceiling, and target ideas
+    int targetPrice, floorPrice, ceilingPrice;//floor, ceiling, and target ideas
     String ad;
     MarketChannelAssignment marketchannelcomb;
     ArrayList<SolutionOrder> solutionorders;
+    
     
     public SolutionOffer(MarketChannelAssignment m){
         marketchannelcomb = m;
         products = new ArrayList();
         solutionorders = new ArrayList();
         m.addSolutionOffer(this); 
-       
+        calcFTCprices();
     } 
+    
+    private void calcFTCprices () {
+        int f = 0,t = 0,c = 0;
+        for (Product p : products) {
+            f += p.getFloorPrice();
+            t += p.getTargetPrice();
+            c += p.getCeilingPrice();
+        }
+        targetPrice = t;
+        floorPrice = f;
+        ceilingPrice = c;
+    }
     
     public void addProduct(Product p){
         products.add(p);
+        calcFTCprices();
     }
-    public void setTotalPrice(int p){
-        price = p;
-        
+//    public void setTotalPrice(int p){
+//        price = p;
+//        
+//    }
+//    public int getSolutionPrice(){
+//        return price;
+//    }
+
+    public int getTargetPrice() {
+        return targetPrice;
     }
-    public int getSolutionPrice(){
-        return price;
+
+    public void setTargetPrice(int targetPrice) {
+        this.targetPrice = targetPrice;
     }
+
+    public int getFloorPrice() {
+        return floorPrice;
+    }
+
+    public void setFloorPrice(int floorPrice) {
+        this.floorPrice = floorPrice;
+    }
+
+    public int getCeilingPrice() {
+        return ceilingPrice;
+    }
+
+    public void setCeilingPrice(int ceilingPrice) {
+        this.ceilingPrice = ceilingPrice;
+    }
+    
     
     public int getRevenues(){
         int sum = 0;
         for(SolutionOrder so: solutionorders){
-            sum = sum + so.getSolutionPrice();
-            
+            sum = sum + so.getActualPrice();
+        }
+        return sum;
+    }
+    
+    public int getSolutionOfferPricePerformance () {
+//    calc priceperformance of all solutionorders placed of this solutionoffer
+        int sum = 0;
+        for (SolutionOrder so: solutionorders) {
+            sum += so.calculatePricePerformance();
+        }
+        return sum;
+    }
+    
+    public int frequencyAboveTarget() {
+        int sum = 0;
+        for(SolutionOrder so: solutionorders){
+            if ( so.isActualAboveTarget() ){
+                sum = sum + 1;
+            }
+        }
+        return sum;
+    }
+    
+    public int frequencyBelowTarget() {
+        int sum = 0;
+        for(SolutionOrder so: solutionorders){
+            if ( so.isActualBelowTarget() ){
+                sum = sum + 1;
+            }
         }
         return sum;
     }

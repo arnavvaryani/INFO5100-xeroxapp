@@ -43,7 +43,7 @@ public class MarketChannelAssignment {
     public int getRevenues(){
         int sum = 0;
         for(SolutionOrder so: solutionorderlist){
-            sum = sum + so.getSolutionPrice();
+            sum = sum + so.getActualPrice();
             
         }
         return sum;
