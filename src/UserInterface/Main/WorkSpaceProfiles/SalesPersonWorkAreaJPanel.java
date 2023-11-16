@@ -13,8 +13,10 @@ package UserInterface.Main.WorkSpaceProfiles;
 import TheBusiness.Business.Business;
 import TheBusiness.CustomerManagement.CustomerProfile;
 import TheBusiness.SalesManagement.SalesPersonProfile;
+import UserInterface.Main.PricingMainFrame;
 import UserInterface.Main.WorkSpaceProfiles.OrderManagement.ManageSalesPersonOrders;
 import UserInterface.Main.WorkSpaceProfiles.OrderManagement.ProcessOrder;
+import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
@@ -59,6 +61,7 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
         jButton11 = new javax.swing.JButton();
         customerNameTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
 
         setForeground(new java.awt.Color(51, 51, 51));
 
@@ -134,6 +137,13 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Customer");
 
+        btnLogout.setText("Log Out");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,22 +152,25 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(customerNameTextField)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)))
+                    .addComponent(customerNameTextField)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(399, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnLogout))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addComponent(btnLogout)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(customerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,7 +183,7 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -231,8 +244,15 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
     private javax.swing.JTextField customerNameTextField;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
