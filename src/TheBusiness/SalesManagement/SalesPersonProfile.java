@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import TheBusiness.OrderManagement.Order;
 import TheBusiness.Personnel.Person;
 import TheBusiness.Personnel.Profile;
+import TheBusiness.SolutionOrders.SolutionOrder;
 
 /**
  *
@@ -16,17 +17,24 @@ import TheBusiness.Personnel.Profile;
  */
 public class SalesPersonProfile extends Profile {
     ArrayList<Order> salesorders;
+    ArrayList<SolutionOrder> solutionsalesorders;
 
 
     public SalesPersonProfile(Person p) {
 
         super(p); 
         salesorders = new ArrayList();
+        solutionsalesorders = new ArrayList();
 
     }
     public void addSalesOrder(Order o){
         salesorders.add(o);
     }
+    
+    public void addSolutionSalesOrder(SolutionOrder so){
+        solutionsalesorders.add(so);
+    }
+    
     @Override
     public String getRole(){
         return  "Sales";

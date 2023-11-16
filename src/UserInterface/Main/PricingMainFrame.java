@@ -17,6 +17,7 @@ import UserInterface.Main.WorkSpaceProfiles.MarketingManagerWorkAreaJPanel1;
 import UserInterface.Main.WorkSpaceProfiles.SalesPersonWorkAreaJPanel;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author kal bugrara
@@ -31,7 +32,7 @@ public class PricingMainFrame extends javax.swing.JFrame {
 
     public PricingMainFrame() {
         initComponents();
-        business = ConfigureABusiness.initialize();
+        business = ConfigureABusiness.initializeMarkets();
         setSize(900,500);
 
     }

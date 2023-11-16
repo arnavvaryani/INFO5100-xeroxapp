@@ -5,6 +5,7 @@
  */
 package TheBusiness;
 
+//import UserInterface.Main.ConfigureABusiness;
 import TheBusiness.Business.Business;
 
 /**
@@ -18,7 +19,7 @@ public class RangePricingApplication {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       Business business = ConfigureABusiness.initializeMarkets();
+//       Business business = ConfigureABusiness.initializeMarkets();
               
     }
 

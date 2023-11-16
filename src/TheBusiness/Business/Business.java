@@ -38,7 +38,7 @@ public class Business {
     MarketChannelComboCatalog marketChannelComboCatalog;
     SolutionOfferCatalog solutionoffercatalog;
     CustomerDirectory customerdirectory;
-    // EmployeeDirectory employeedirectory;
+//     EmployeeDirectory employeedirectory;
     SalesPersonDirectory salespersondirectory;
     UserAccountDirectory useraccountdirectory;
     MarketingPersonDirectory marketingpersondirectory;
