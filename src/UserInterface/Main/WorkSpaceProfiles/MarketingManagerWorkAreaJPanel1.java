@@ -113,6 +113,8 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Marketing ");
 
+        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogout.setForeground(new java.awt.Color(0, 0, 0));
         btnLogout.setText("Log Out");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

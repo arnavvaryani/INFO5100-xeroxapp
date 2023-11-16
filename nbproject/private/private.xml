@@ -3,36 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/UserAccountManagement/UserAccount.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/UserInterface/ManageTheBusiness/ManageTheBusinessJPanel.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Business/Business.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/OrderManagement/OrderSummary.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/MarketModel/MarketChannelAssignment.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/UserInterface/ManageTheBusiness/ManageBusinessDetail1.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Supplier/Supplier.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/MarketModel/SolutionOfferCatalog.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/ProductManagement/ProductsReport.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Personnel/EmployeeProfile.java</file>
             <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/UserInterface/Main/PricingMainFrame.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/OrderManagement/MasterOrderList.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Personnel/EmployeeDirectory.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Personnel/Person.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/ProductManagement/Product.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/ConfigureABusiness.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Supplier/SupplierDirectory.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/SolutionOrders/SolutionOrder.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Personnel/CustomerAccount.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Personnel/Profile.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/UserAccountManagement/UserAccountDirectory.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/Personnel/PersonDirectory.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/OrderManagement/Order.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/SolutionOrders/MasterSolutionOrderList.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/OrderManagement/MasterOrderReport.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/MarketingManagement/MarketingPersonProfile.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/ProductManagement/ProductSummary.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/UserInterface/Main/ConfigureABusiness.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/OrderManagement/OrderItem.java</file>
-            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/TheBusiness/MarketModel/SolutionOffer.java</file>
+            <file>file:/Users/nehadevarapalli/NetBeansProjects/assignment-4-team-naa/src/UserInterface/Main/WorkSpaceProfiles/MarketingManagerWorkAreaJPanel1.java</file>
         </group>
     </open-files>
 </project-private>

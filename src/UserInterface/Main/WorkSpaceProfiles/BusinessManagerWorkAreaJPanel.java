@@ -139,6 +139,8 @@ public class BusinessManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogout.setForeground(new java.awt.Color(0, 0, 0));
         btnLogout.setText("Log Out");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
