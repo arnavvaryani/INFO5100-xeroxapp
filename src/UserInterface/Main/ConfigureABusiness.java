@@ -11,6 +11,8 @@ import TheBusiness.Business.Business;
 import TheBusiness.MarketModel.ChannelCatalog;
 import TheBusiness.CustomerManagement.CustomerDirectory;
 import TheBusiness.CustomerManagement.CustomerProfile;
+import TheBusiness.CustomerManagement.CustomerSummary;
+import TheBusiness.CustomerManagement.CustomersReport;
 import TheBusiness.MarketModel.Channel;
 import TheBusiness.MarketModel.Market;
 import TheBusiness.MarketModel.MarketCatalog;
@@ -30,11 +32,14 @@ import TheBusiness.ProductManagement.ProductSummary;
 import TheBusiness.ProductManagement.ProductCatalog;
 import TheBusiness.SalesManagement.SalesPersonDirectory;
 import TheBusiness.SalesManagement.SalesPersonProfile;
+import TheBusiness.SalesManagement.SalesPersonSummary;
+import TheBusiness.SalesManagement.SalesPersonsReport;
 import TheBusiness.SolutionOrders.SolutionOrder;
 import TheBusiness.Supplier.Supplier;
 import TheBusiness.Supplier.SupplierDirectory;
 import TheBusiness.UserAccountManagement.UserAccount;
 import TheBusiness.UserAccountManagement.UserAccountDirectory;
+import java.util.ArrayList;
 
 /**
  *
@@ -168,12 +173,14 @@ class ConfigureABusiness {
         Person xeroxsalesperson001 = persondirectory.newPerson("Xerox sales001");
         Person xeroxsalesperson002 = persondirectory.newPerson("Xerox sales002");
         Person xeroxmarketingperson001 = persondirectory.newPerson("Xerox marketing");
-        Person teencustomerperson001 = persondirectory.newPerson("teen customer");
+        Person teencustomerperson001 = persondirectory.newPerson("teen customer001");
+        Person teencustomerperson002 = persondirectory.newPerson("teen customer002");
 
 // Create Customers
         CustomerDirectory customedirectory = business.getCustomerDirectory();
 //        CustomerProfile customerprofile1 = customedirectory.newCustomerProfile(xeroxsalesperson001);
         CustomerProfile teencustomerprofile001 = customedirectory.newCustomerProfile(teencustomerperson001);
+        CustomerProfile teencustomerprofile002 = customedirectory.newCustomerProfile(teencustomerperson002);
 
 // Create Sales people
         SalesPersonDirectory salespersondirectory = business.getSalesPersonDirectory();
@@ -249,9 +256,11 @@ class ConfigureABusiness {
 
         MasterSolutionOrderList msol = business.getMasterSolutionOrderList();
 
-        SolutionOrder so = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile,solutiontvteen, tvchannelteenmarket, 144500, 3);
+        SolutionOrder so11 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile,solutiontvteen, tvchannelteenmarket, 144500, 1);
+        SolutionOrder so12 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile,solutiontvteen, tvchannelteenmarket, 144500, 1);
+        SolutionOrder so13 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile,solutiontvteen, tvchannelteenmarket, 144500, 1);
         
-        SolutionOrder so2 = msol.newSolutionOrder(teencustomerprofile001, salesperson2profile,solutionwebteen, webchannelteenmarket, 150000, 1);
+        SolutionOrder so2 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile,solutionwebteen, webchannelteenmarket, 150000, 1);
         
         int tvteenRevenue = msol.getRevenueByMarketChannelCombo(tvchannelteenmarket);
         int webteenRevenue = msol.getRevenueByMarketChannelCombo(webchannelteenmarket);
@@ -267,6 +276,24 @@ class ConfigureABusiness {
         System.out.println("priceperformance of solutionwebteen"+ solutionwebteenRevenue);
         System.out.println("priceperformance of solutiontvteen"+ solutiontvteenRevenue);
      
+//        Usecase 1
+        
+//        Usecase 2
+        CustomersReport cr = customedirectory.generatCustomerPerformanceReport();
+        ArrayList<CustomerSummary> sorted = cr.getSummariesSortedFrequencyAboveTarget();
+        
+        for (CustomerSummary cs: sorted) {
+            System.out.println("Customer ID:"+cs.getCustomer().getCustomerId()+"Solution Orders Above Target"+cs.getFrequencyOfSolutionOrdersAboveTarget());
+        }
+        
+//        Usecase 3
+        SalesPersonsReport spr = salespersondirectory.generateSalesPersonsReport();
+        ArrayList<SalesPersonSummary> sortedSales = spr.getSummariesSortedByFrequencyAboveTarget();
+        
+        for (SalesPersonSummary ss: sortedSales) {
+            System.out.println("SalesPerson ID:"+ss.getSalesPerson().getPerson().getPersonId()+"Solution Orders Above Target"+ss.getFrequencyOfSolutionOrdersAboveTarget());
+        }
+        
         return business;
 
     }

@@ -28,7 +28,7 @@ public class SolutionOrder {
         this.salespersonProfile = sp;
         selectedsolutionoffer = so;
         customerProfile.addCustomerSolutionOrder(this);
-        salespersonProfile.addSolutionSalesOrder(this);
+        salespersonProfile.addSolutionOrder(this);
         marketChannelAssignment = mca;
         this.actualPrice = paidPrice;
         this.quantity = q;
