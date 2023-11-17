@@ -5,10 +5,12 @@
  */
 package TheBusiness.SolutionOrders;
 
+import TheBusiness.CustomerManagement.CustomerProfile;
 import TheBusiness.MarketModel.Channel;
 import TheBusiness.MarketModel.Market;
 import TheBusiness.MarketModel.MarketChannelAssignment;
 import TheBusiness.MarketModel.SolutionOffer;
+import TheBusiness.SalesManagement.SalesPersonProfile;
 import java.util.ArrayList;
 
 /**
@@ -22,9 +24,9 @@ public class MasterSolutionOrderList {
         solutionorderlist = new ArrayList();
     }
 
-    public SolutionOrder newSolutionOrder(SolutionOffer soloffer,  MarketChannelAssignment mca) {
+    public SolutionOrder newSolutionOrder(CustomerProfile cp, SalesPersonProfile sp, SolutionOffer soloffer,  MarketChannelAssignment mca, int paidPrice, int q) {
 
-        SolutionOrder so = new SolutionOrder(soloffer,   mca);
+        SolutionOrder so = new SolutionOrder(cp,sp,soloffer, mca, paidPrice, q);
         solutionorderlist.add(so);
         soloffer.addSolutionOrder(so);
         return so;
@@ -36,7 +38,7 @@ public class MasterSolutionOrderList {
         for(SolutionOrder so: solutionorderlist){
          
          MarketChannelAssignment mcc =   so.getMarketChannelCombo();
-         if(mcc.getMarket()==m) sum = sum +so.getSolutionPrice();
+         if(mcc.getMarket()==m) sum = sum +so.getActualPrice();
            
         }
 
@@ -48,7 +50,7 @@ public class MasterSolutionOrderList {
         for(SolutionOrder so: solutionorderlist){
          
          MarketChannelAssignment mcc =   so.getMarketChannelCombo();
-         if(mcc.getChannel()==c) sum = sum +so.getSolutionPrice();
+         if(mcc.getChannel()==c) sum = sum +so.getActualPrice();
            
         }
 
@@ -60,7 +62,7 @@ public class MasterSolutionOrderList {
         for(SolutionOrder so: solutionorderlist){
          
          MarketChannelAssignment mcc =   so.getMarketChannelCombo();
-         if(mcc==mca) sum = sum +so.getSolutionPrice(); 
+         if(mcc==mca) sum = sum +so.getActualPrice(); 
            
         }
         return sum;

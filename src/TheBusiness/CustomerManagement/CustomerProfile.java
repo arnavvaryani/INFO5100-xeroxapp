@@ -10,6 +10,7 @@ import TheBusiness.MarketModel.Market;
 import TheBusiness.OrderManagement.Order;
 import TheBusiness.Personnel.Person;
 import TheBusiness.Personnel.Profile;
+import TheBusiness.SolutionOrders.SolutionOrder;
 
 /**
  *
@@ -19,19 +20,20 @@ public class CustomerProfile extends Profile {
 
     ArrayList<Order> orders;
     ArrayList<Market> markets;
-
+    ArrayList<SolutionOrder> solutionOrders;
     Person person;
 
     public CustomerProfile(Person p) {
         super(p);
         person = p;
         orders = new ArrayList();
-
+        solutionOrders = new ArrayList();
     }
     
     @Override
     public String getRole(){
-        return "Sales";
+//        return "Sales";
+        return "Customer";
     }
     
     
@@ -40,7 +42,19 @@ public class CustomerProfile extends Profile {
 
         //for each order in the customer orderlist 
         //calculate order price performance and add it to the sum
-        return 0;
+        int sum = 0;
+        for (Order o: orders) {
+            sum += o.getOrderPricePerformance();
+        }
+        return sum;
+    }
+    
+    public int getTotalPricePerforamanceSolution() {
+        int sum = 0;
+        for (SolutionOrder so: solutionOrders) {
+//            sum += so.getOrderPricePerformance();
+        }
+        return sum;
     }
 
     public int getNumberOfOrdersAboveTotalTarget() {
@@ -58,7 +72,14 @@ public class CustomerProfile extends Profile {
     }
 
     public int getNumberOfOrdersBelowTotalTarget() {
-        return 0;
+        int sum = 0;
+        for (Order o : orders) {
+            if (o.isOrderAboveTotalTarget() == false) {
+                sum = sum + 1;
+            }
+        }
+
+        return sum;
     }
     //for each order in the customer order list 
     //calculate if order is negative
@@ -73,6 +94,10 @@ public class CustomerProfile extends Profile {
 
     public void addCustomerOrder(Order o) {
         orders.add(o);
+    }
+    
+    public void addCustomerSolutionOrder(SolutionOrder so) {
+        solutionOrders.add(so);
     }
 
     @Override

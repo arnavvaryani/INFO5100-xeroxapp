@@ -5,8 +5,10 @@
  */
 package TheBusiness.SolutionOrders;
 
+import TheBusiness.CustomerManagement.CustomerProfile;
 import TheBusiness.MarketModel.MarketChannelAssignment;
 import TheBusiness.MarketModel.SolutionOffer;
+import TheBusiness.SalesManagement.SalesPersonProfile;
 
 /**
  *
@@ -16,17 +18,54 @@ import TheBusiness.MarketModel.SolutionOffer;
 public class SolutionOrder {
     
     SolutionOffer selectedsolutionoffer;
-  //  CustomerProfile customerprofile;
+    CustomerProfile customerProfile;
     MarketChannelAssignment marketChannelAssignment; 
-    public SolutionOrder(SolutionOffer so,  MarketChannelAssignment mca){
+    SalesPersonProfile salespersonProfile;
+    int actualPrice;
+    int quantity;
+    public SolutionOrder(CustomerProfile cp, SalesPersonProfile sp, SolutionOffer so, MarketChannelAssignment mca, int paidPrice, int q){
+        this.customerProfile = cp;
+        this.salespersonProfile = sp;
         selectedsolutionoffer = so;
+        customerProfile.addCustomerSolutionOrder(this);
+        salespersonProfile.addSolutionSalesOrder(this);
         marketChannelAssignment = mca;
+        this.actualPrice = paidPrice;
+        this.quantity = q;
+    }
 
+    public int getActualPrice() {
+        return actualPrice;
+    }
+
+    public void setActualPrice(int actualPrice) {
+        this.actualPrice = actualPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
     
-    public int getSolutionPrice(){
-        return selectedsolutionoffer.getSolutionPrice();
+    public int calculatePricePerformance() {
+        return (actualPrice - this.selectedsolutionoffer.getTargetPrice()) * quantity;
     }
+    
+    public boolean isActualAboveTarget () {
+        return actualPrice > this.selectedsolutionoffer.getTargetPrice();
+    }
+    
+    public boolean isActualBelowTarget () {
+        return actualPrice < this.selectedsolutionoffer.getTargetPrice();
+    }
+    
+    public boolean isActualAtTarget () {
+        return actualPrice == this.selectedsolutionoffer.getTargetPrice();
+    }
+    
     public MarketChannelAssignment getMarketChannelCombo(){
         
         return marketChannelAssignment;
