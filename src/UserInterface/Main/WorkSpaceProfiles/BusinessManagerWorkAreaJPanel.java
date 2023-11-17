@@ -53,6 +53,7 @@ public class BusinessManagerWorkAreaJPanel extends javax.swing.JPanel {
         jButton11 = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(51, 51, 51));
 
         jButton4.setBackground(new java.awt.Color(102, 153, 255));
@@ -192,8 +193,6 @@ public class BusinessManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton4IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4IdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.removeAll();
-
         ManageTheBusinessJPanel aos = new ManageTheBusinessJPanel(business, CardSequencePanel);
 
         CardSequencePanel.add("ManageVulns", aos);
@@ -204,7 +203,6 @@ public class BusinessManagerWorkAreaJPanel extends javax.swing.JPanel {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
 
-        CardSequencePanel.removeAll();
 //        ManageVulns aos = new  ManageVulns(businessunit, CardSequencePanel);
         // aos.setAgenda(businessunit.getRiskManagementAgenda());
 //        CardSequencePanel.add("ManageVulns", aos);
@@ -224,7 +222,6 @@ public class BusinessManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.removeAll();
         //    IdentifyEventTypes iet= new IdentifyEventTypes(businessunit, CardSequencePanel);
 
         //    CardSequencePanel.add("IdentifyEventTypes", iet);
@@ -235,7 +232,6 @@ public class BusinessManagerWorkAreaJPanel extends javax.swing.JPanel {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
 
-        CardSequencePanel.removeAll();
         //      ViewBusinessUnitRiskProfile drpd= new ViewBusinessUnitRiskProfile(businessunit, CardSequencePanel);
 //        ManageHazards drpd = new ManageHazards(businessunit, CardSequencePanel);
 //        CardSequencePanel.add("ManageRiskProfiles", drpd);
@@ -245,7 +241,6 @@ public class BusinessManagerWorkAreaJPanel extends javax.swing.JPanel {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
 
-        CardSequencePanel.removeAll();
 //        ManageIncidents aos = new  ManageIncidents(businessunit, CardSequencePanel);
         // aos.setAgenda(businessunit.getRiskManagementAgenda());
 //        CardSequencePanel.add("RiskAgendaObjectives", aos);
