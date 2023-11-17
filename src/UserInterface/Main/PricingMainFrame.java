@@ -109,13 +109,19 @@ public class PricingMainFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Username");
 
+        UserNameTextField.setBackground(new java.awt.Color(255, 255, 255));
+        UserNameTextField.setForeground(new java.awt.Color(102, 102, 102));
         UserNameTextField.setText("sales");
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
 
+        PasswordTextField.setBackground(new java.awt.Color(255, 255, 255));
+        PasswordTextField.setForeground(new java.awt.Color(102, 102, 102));
         PasswordTextField.setText("XXXX");
 
+        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogin.setForeground(new java.awt.Color(0, 0, 0));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

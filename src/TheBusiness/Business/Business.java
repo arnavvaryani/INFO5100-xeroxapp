@@ -16,6 +16,7 @@ import TheBusiness.Personnel.PersonDirectory;
 import TheBusiness.ProductManagement.ProductSummary;
 import TheBusiness.ProductManagement.ProductsReport;
 import TheBusiness.MarketModel.SolutionOfferCatalog;
+import TheBusiness.Personnel.EmployeeDirectory;
 import TheBusiness.SolutionOrders.MasterSolutionOrderList;
 import TheBusiness.SalesManagement.SalesPersonDirectory;
 import TheBusiness.Supplier.Supplier;
@@ -38,18 +39,17 @@ public class Business {
     MarketChannelComboCatalog marketChannelComboCatalog;
     SolutionOfferCatalog solutionoffercatalog;
     CustomerDirectory customerdirectory;
-//     EmployeeDirectory employeedirectory;
+    EmployeeDirectory employeedirectory;
     SalesPersonDirectory salespersondirectory;
     UserAccountDirectory useraccountdirectory;
     MarketingPersonDirectory marketingpersondirectory;
     MasterSolutionOrderList mastersolutionorderlist;
 
-
     public Business(String n) {
         name = n;
         masterorderlist = new MasterOrderList();
         suppliers = new SupplierDirectory();
-
+        employeedirectory = new EmployeeDirectory(this);
         persondirectory = new PersonDirectory();
         customerdirectory = new CustomerDirectory(this);
         salespersondirectory = new SalesPersonDirectory(this);
@@ -63,15 +63,14 @@ public class Business {
 //        Channel c = channelcatalog.newChannel("tv");
 //        market.addValidChannel(c);
 //        c = channelcatalog.newChannel("");
-
         marketChannelComboCatalog = new MarketChannelComboCatalog();
 //        MarketChannelAssignment mca2 = marketChannelComboCatalog.newMarketChannelCombo(market, c);
 
         solutionoffercatalog = new SolutionOfferCatalog();
-        mastersolutionorderlist  = new MasterSolutionOrderList();
+        mastersolutionorderlist = new MasterSolutionOrderList();
 
     }
-  
+
     public int getSalesVolume() {
         return masterorderlist.getSalesVolume();
 
@@ -134,18 +133,25 @@ public class Business {
     public ChannelCatalog getChannelCatalog() {
         return channelcatalog;
     }
-    public SolutionOfferCatalog getSolutionOfferCatalog(){
+
+    public SolutionOfferCatalog getSolutionOfferCatalog() {
         return solutionoffercatalog;
     }
+
     public MarketChannelComboCatalog getMarketChannelComboCatalog() {
 
         return marketChannelComboCatalog;
     }
-    public MasterSolutionOrderList getMasterSolutionOrderList(){
+
+    public MasterSolutionOrderList getMasterSolutionOrderList() {
         return mastersolutionorderlist;
     }
     //       public EmployeeDirectory getEmployeeDirectory() {
     //      return employeedirectory;
     //  }
+
+    public EmployeeDirectory getEmployeeDirectory() {
+        return employeedirectory;
+    }
 
 }

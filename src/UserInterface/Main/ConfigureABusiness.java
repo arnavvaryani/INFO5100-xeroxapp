@@ -23,6 +23,7 @@ import TheBusiness.SolutionOrders.MasterSolutionOrderList;
 import TheBusiness.OrderManagement.Order;
 import TheBusiness.OrderManagement.OrderItem;
 import TheBusiness.Personnel.EmployeeDirectory;
+import TheBusiness.Personnel.EmployeeProfile;
 import TheBusiness.Personnel.Person;
 import TheBusiness.Personnel.PersonDirectory;
 import TheBusiness.ProductManagement.Product;
@@ -76,8 +77,8 @@ class ConfigureABusiness {
         MarketingPersonProfile marketingpersonprofile0 = marketingpersondirectory.newMarketingPersonProfile(xeroxmarketingperson001);
 
 // Create Admins to manage the business
-//        EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
-//        EmployeeProfile employeeprofile0 = employeedirectory.newEmployeeProfile(xeroxadminperson001);
+        EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
+        EmployeeProfile employeeprofile0 = employeedirectory.newEmployeeProfile(xeroxadminperson001);
         SupplierDirectory suplierdirectory = business.getSupplierDirectory();
 
         Supplier supplier1 = suplierdirectory.newSupplier("Lenovo");
@@ -107,7 +108,7 @@ class ConfigureABusiness {
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua1 = uadirectory.newUserAccount(salespersonprofile, "Sales", "XXXX"); /// order products for one of the customers and performed by a sales person
         UserAccount ua2 = uadirectory.newUserAccount(marketingpersonprofile0, "Marketing", "XXXX"); /// order products for one of the customers and performed by a sales person
-//        UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "Admin", "XXXX"); /// order products for one of the customers and performed by a sales person
+        UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "Admin", "XXXX"); /// order products for one of the customers and performed by a sales person
 
 // Process Orders on behalf of sales person and customer
         MasterOrderList masterorderlist = business.getMasterOrderList();

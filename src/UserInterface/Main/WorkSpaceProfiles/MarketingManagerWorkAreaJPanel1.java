@@ -52,6 +52,7 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(51, 51, 51));
 
         jButton4.setBackground(new java.awt.Color(102, 153, 255));
@@ -111,8 +112,11 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("Marketing ");
 
+        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogout.setForeground(new java.awt.Color(0, 0, 0));
         btnLogout.setText("Log Out");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +169,6 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
 
     private void jButton4IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4IdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.removeAll();
 
         ManageTheBusinessJPanel aos = new ManageTheBusinessJPanel(business, CardSequencePanel);
 
@@ -186,7 +189,6 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.removeAll();
         //    IdentifyEventTypes iet= new IdentifyEventTypes(businessunit, CardSequencePanel);
 
         //    CardSequencePanel.add("IdentifyEventTypes", iet);
@@ -197,7 +199,6 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
 
-        CardSequencePanel.removeAll();
 //        ManageIncidents aos = new  ManageIncidents(businessunit, CardSequencePanel);
         // aos.setAgenda(businessunit.getRiskManagementAgenda());
 //        CardSequencePanel.add("RiskAgendaObjectives", aos);
