@@ -11,16 +11,15 @@ package TheBusiness.Personnel;
  */
 public class EmployeeProfile extends Profile {
 
-
-
     public EmployeeProfile(Person p) {
 
-        super(p); 
+        super(p);
 
     }
+
     @Override
-    public String getRole(){
-        return  "Admin";
+    public String getRole() {
+        return "Admin";
     }
 
 }
