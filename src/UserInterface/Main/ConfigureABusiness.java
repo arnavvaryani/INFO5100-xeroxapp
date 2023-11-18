@@ -40,6 +40,7 @@ import TheBusiness.Supplier.SupplierDirectory;
 import TheBusiness.UserAccountManagement.UserAccount;
 import TheBusiness.UserAccountManagement.UserAccountDirectory;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -277,7 +278,7 @@ class ConfigureABusiness {
         System.out.println("priceperformance of solutiontvteen"+ solutiontvteenRevenue);
      
 //        Usecase 1
-        
+
 //        Usecase 2
         CustomersReport cr = customedirectory.generatCustomerPerformanceReport();
         ArrayList<CustomerSummary> sorted = cr.getSummariesSortedFrequencyAboveTarget();
@@ -292,6 +293,13 @@ class ConfigureABusiness {
         
         for (SalesPersonSummary ss: sortedSales) {
             System.out.println("SalesPerson ID:"+ss.getSalesPerson().getPerson().getPersonId()+"Solution Orders Above Target"+ss.getFrequencyOfSolutionOrdersAboveTarget());
+        }
+        
+//        Usecase 4
+        Map<Integer, Market> map = mccc.getPricePerformanceOfEachMarkets();
+        
+        for(Map.Entry<Integer, Market> entry: map.entrySet()) {
+            System.out.println("Market Name:" +entry.getValue().getName() +"Revenue: "+entry.getKey());
         }
         
         return business;

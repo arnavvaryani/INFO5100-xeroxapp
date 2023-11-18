@@ -16,8 +16,6 @@ public class MarketSummary {
     int revenue;
 
     public MarketSummary(Market m){
-
-                
     }
                 
     }

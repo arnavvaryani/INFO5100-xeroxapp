@@ -17,7 +17,7 @@ public class MarketChannelSummary {
     public MarketChannelSummary(MarketChannelAssignment mc){
         
         marketchannelassignment = mc;        
-        revenues = mc.getRevenues();        
+        revenues = mc.getMcaPricePerformance();        
     }
     public int getRevenues(){
         return revenues;
