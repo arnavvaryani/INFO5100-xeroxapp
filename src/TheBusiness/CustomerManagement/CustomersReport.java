@@ -6,18 +6,27 @@
 package TheBusiness.CustomerManagement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
  * @author kal bugrara
  */
 public class CustomersReport {
-    ArrayList<CustomerSummary> customerlist;
+    ArrayList<CustomerSummary> summaries;
     
     public CustomersReport(){
-        
+        this.summaries = new ArrayList<>();
     }
-    public void addCustomerSummary(CustomerSummary cs){
-        
+    
+    public CustomerSummary addCustomerSummary(CustomerProfile cp){
+        CustomerSummary summary = new CustomerSummary(cp);
+        summaries.add(summary);
+        return summary;
+    }
+    
+    public ArrayList<CustomerSummary> getSummariesSortedFrequencyAboveTarget() {
+        Collections.sort(summaries, new SummaryComparator());
+        return summaries;
     }
 }

@@ -40,16 +40,23 @@ public class CustomerDirectory {
                 return sp;
             }
         }
-            return null; //not found after going through the whole list
-         }
-        public CustomersReport generatCustomerPerformanceReport(){
-        CustomersReport customersreport = new CustomersReport();
-    
-        for(CustomerProfile cp: customerlist){
-            
-            CustomerSummary cs = new CustomerSummary(cp);
-            customersreport.addCustomerSummary(cs);
+        return null; //not found after going through the whole list
+    }
+
+    public CustomersReport generatCustomerPerformanceReport() {
+//        CustomersReport customersreport = new CustomersReport();
+//
+//        for (CustomerProfile cp : customerlist) {
+//
+//            CustomerSummary cs = new CustomerSummary(cp);
+//            customersreport.addCustomerSummary(cs);
+//        }
+//        return customersreport;
+//    }
+        CustomersReport cr = new CustomersReport();
+        for (CustomerProfile cp : customerlist) {
+            cr.addCustomerSummary(cp);
         }
-        return customersreport; 
-    } 
+        return cr;
+    }
 }

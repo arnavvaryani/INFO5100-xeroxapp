@@ -23,6 +23,7 @@ public class SolutionOfferCatalog {
         
         SolutionOffer so = new SolutionOffer(mca);
         solutionoffers.add(so);
+        mca.addSolutionOffer(so);
         
         return so;
     }

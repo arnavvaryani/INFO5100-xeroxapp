@@ -42,5 +42,12 @@ public class SalesPersonDirectory {
         }
             return null; //not found after going through the whole list
          }
+    public SalesPersonsReport generateSalesPersonsReport() {
+        SalesPersonsReport spr = new SalesPersonsReport();
+        for (SalesPersonProfile sp: salespersonlist) {
+            spr.addSalesPersonSummary(sp);
+        }
+        return spr;
+    }
 
 }
