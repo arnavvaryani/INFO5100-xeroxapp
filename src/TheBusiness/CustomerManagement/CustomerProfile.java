@@ -36,8 +36,6 @@ public class CustomerProfile extends Profile {
         return "Customer";
     }
     
-    
-
     public int getTotalPricePerformance() {
 
         //for each order in the customer orderlist 
@@ -81,6 +79,42 @@ public class CustomerProfile extends Profile {
 
         return sum;
     }
+    
+    public int FrequencyOfSolutionOrdersAboveTarget() {
+        //for each order in the customer order list 
+        //calculate if order is positive (actual order total is greater than sum of item targets
+        //if yes then add 1 to total 
+        int sum = 0;
+        for (SolutionOrder so : solutionOrders) {
+            if (so.isActualAboveTarget() == true) {
+                sum = sum + 1;
+            }
+        }
+
+        return sum;
+    }
+
+    public int FrequencyOfSolutionOrdersBelowTarget() {
+        int sum = 0;
+        for (SolutionOrder so : solutionOrders) {
+            if (so.isActualBelowTarget() == true) {
+                sum = sum + 1;
+            }
+        }
+
+        return sum;
+    }
+    
+    public int FrequencyOfSolutionOrdersAtTarget() {
+        int sum = 0;
+        for (SolutionOrder so : solutionOrders) {
+            if (so.isActualAtTarget() == true) {
+                sum = sum + 1;
+            }
+        }
+
+        return sum;
+    }
     //for each order in the customer order list 
     //calculate if order is negative
     //if yes then add 1 to total 
@@ -98,6 +132,14 @@ public class CustomerProfile extends Profile {
     
     public void addCustomerSolutionOrder(SolutionOrder so) {
         solutionOrders.add(so);
+    }
+    
+    public int getSolutionOrdersTotal() {
+        int sum = 0;
+        for (SolutionOrder so: solutionOrders) {
+            sum += so.getActualPrice();
+        }
+        return sum;
     }
 
     @Override

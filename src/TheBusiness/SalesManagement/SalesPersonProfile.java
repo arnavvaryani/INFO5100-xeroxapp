@@ -17,22 +17,48 @@ import TheBusiness.SolutionOrders.SolutionOrder;
  */
 public class SalesPersonProfile extends Profile {
     ArrayList<Order> salesorders;
-    ArrayList<SolutionOrder> solutionsalesorders;
+    ArrayList<SolutionOrder> solutionorders;
 
 
     public SalesPersonProfile(Person p) {
 
         super(p); 
         salesorders = new ArrayList();
-        solutionsalesorders = new ArrayList();
+        solutionorders = new ArrayList();
 
     }
     public void addSalesOrder(Order o){
         salesorders.add(o);
     }
     
-    public void addSolutionSalesOrder(SolutionOrder so){
-        solutionsalesorders.add(so);
+    public void addSolutionOrder(SolutionOrder so){
+        solutionorders.add(so);
+    }
+    
+    public int getTotalSolutionOrdersValue() {
+        int sum = 0;
+        for (SolutionOrder so: solutionorders) {
+            sum += so.getActualPrice();
+        }
+        return sum;
+    }
+    
+    public int getTotalPricePerformance() {
+        int sum = 0;
+        for (SolutionOrder so: solutionorders) {
+            sum += so.calculatePricePerformance();
+        }
+        return sum;
+    }
+    
+    public int getFrequencyOfSolutionOrdersAboveTarget() {
+        int sum = 0;
+        for (SolutionOrder so: solutionorders) {
+            if (so.isActualAboveTarget()) {
+                sum += 1;
+            }
+        }
+        return sum;
     }
     
     @Override

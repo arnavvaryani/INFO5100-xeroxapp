@@ -29,6 +29,7 @@ public class MasterSolutionOrderList {
         SolutionOrder so = new SolutionOrder(cp,sp,soloffer, mca, paidPrice, q);
         solutionorderlist.add(so);
         soloffer.addSolutionOrder(so);
+        mca.addSolutionOrder(so);
         return so;
 
     }

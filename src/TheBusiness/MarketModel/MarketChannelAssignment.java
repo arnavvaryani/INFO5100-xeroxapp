@@ -40,11 +40,10 @@ public class MarketChannelAssignment {
         
     }
     
-    public int getRevenues(){
+    public int getMcaPricePerformance(){
         int sum = 0;
         for(SolutionOrder so: solutionorderlist){
-            sum = sum + so.getActualPrice();
-            
+            sum += so.calculatePricePerformance();
         }
         return sum;
     }
