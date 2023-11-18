@@ -170,10 +170,11 @@ class ConfigureABusiness {
         Person xeroxsalesperson002 = persondirectory.newPerson("Xerox sales002");
         Person xeroxmarketingperson001 = persondirectory.newPerson("Xerox marketing");
         Person teencustomerperson001 = persondirectory.newPerson("teen customer");
+        Person xeroxadminperson001 = persondirectory.newPerson("Xerox admin");
 
 // Create Customers
         CustomerDirectory customedirectory = business.getCustomerDirectory();
-//        CustomerProfile customerprofile1 = customedirectory.newCustomerProfile(xeroxsalesperson001);
+        CustomerProfile customerprofile1 = customedirectory.newCustomerProfile(xeroxsalesperson001);
         CustomerProfile teencustomerprofile001 = customedirectory.newCustomerProfile(teencustomerperson001);
 
 // Create Sales people
@@ -185,6 +186,10 @@ class ConfigureABusiness {
         MarketingPersonDirectory marketingpersondirectory = business.getMarketingPersonDirectory();
         MarketingPersonProfile marketingpersonprofile0 = marketingpersondirectory.newMarketingPersonProfile(xeroxmarketingperson001);
 
+        // Create Admins to manage the business
+        EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
+        EmployeeProfile employeeprofile0 = employeedirectory.newEmployeeProfile(xeroxadminperson001);
+        
         SupplierDirectory suplierdirectory = business.getSupplierDirectory();
 
         Supplier supplier1 = suplierdirectory.newSupplier("Lenovo");
@@ -215,7 +220,7 @@ class ConfigureABusiness {
         UserAccount ua1 = uadirectory.newUserAccount(salesperson1profile, "Sales001", "XXXX"); /// order products for one of the customers and performed by a sales person
         UserAccount ua12 = uadirectory.newUserAccount(salesperson2profile, "Sales002", "XXXX"); /// order products for one of the customers and performed by a sales person
         UserAccount ua2 = uadirectory.newUserAccount(marketingpersonprofile0, "Marketing", "XXXX"); /// order products for one of the customers and performed by a sales person
-//        UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "Admin", "XXXX"); /// order products for one of the customers and performed by a sales person
+        UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "Admin", "XXXX"); /// order products for one of the customers and performed by a sales person
 
 //=============== Define markets and channels...
 
