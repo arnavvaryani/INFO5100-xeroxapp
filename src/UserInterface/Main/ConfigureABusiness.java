@@ -20,6 +20,7 @@ import TheBusiness.MarketModel.MarketChannelAssignment;
 import TheBusiness.MarketModel.MarketChannelComboCatalog;
 import TheBusiness.MarketModel.SolutionOffer;
 import TheBusiness.MarketModel.SolutionOfferCatalog;
+import TheBusiness.MarketModel.SolutionOfferComparator;
 import TheBusiness.OrderManagement.MasterOrderList;
 import TheBusiness.SolutionOrders.MasterSolutionOrderList;
 import TheBusiness.OrderManagement.Order;
@@ -197,7 +198,7 @@ class ConfigureABusiness {
         // Create Admins to manage the business
         EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
         EmployeeProfile employeeprofile0 = employeedirectory.newEmployeeProfile(xeroxadminperson001);
-        
+
         SupplierDirectory suplierdirectory = business.getSupplierDirectory(); // create supplierDirectory
 
         Supplier supplier1 = suplierdirectory.newSupplier("Lenovo"); // load first supplier
@@ -226,12 +227,11 @@ class ConfigureABusiness {
         // Create User accounts that link to specific profiles
         UserAccountDirectory uadirectory = business.getUserAccountDirectory(); // Create userAccountDirectory 
         UserAccount ua1 = uadirectory.newUserAccount(salesperson1profile, "Sales001", "XXXX"); // load userAccountDirectory with 5 salesPersonprofiles, 1 marketing person profile, 1 business manager profile
-        UserAccount ua12 = uadirectory.newUserAccount(salesperson2profile, "Sales002", "XXXX"); 
-        UserAccount ua2 = uadirectory.newUserAccount(marketingpersonprofile0, "Marketing", "XXXX"); 
+        UserAccount ua12 = uadirectory.newUserAccount(salesperson2profile, "Sales002", "XXXX");
+        UserAccount ua2 = uadirectory.newUserAccount(marketingpersonprofile0, "Marketing", "XXXX");
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "Admin", "XXXX"); /// order products for one of the customers and performed by a sales person
 
 //=============== Define markets and channels...
-
         MarketCatalog mc = business.getMarketCatalog(); // create marketCatalog
         Market teenmarket = mc.newMarket("Teenagers"); // load it with 4 markets namely gen z, millenials, gen x, boomers 
         Market teenmarket2 = mc.newMarket("College Grads");
@@ -251,63 +251,84 @@ class ConfigureABusiness {
 
         SolutionOfferCatalog solutionoffercatalog = business.getSolutionOfferCatalog(); // create SolutionOfferCatalog
 
-        SolutionOffer solutiontvteen = solutionoffercatalog.newSolutionOffer(tvchannelteenmarket); // add solutionOffering for every marketchannelassignment created above
+        SolutionOffer solutiontvteen = solutionoffercatalog.newSolutionOffer(tvchannelteenmarket, "tv-teen-solution1"); // add solutionOffering for every marketchannelassignment created above
         solutiontvteen.addProduct(products2p2); // add few products to the solutionOffering
         solutiontvteen.addProduct(products2p1);
 //        solutiontvteen.setTotalPrice(1000);
 
-        SolutionOffer solutionwebteen = solutionoffercatalog.newSolutionOffer(webchannelteenmarket);
+        SolutionOffer solutionwebteen = solutionoffercatalog.newSolutionOffer(webchannelteenmarket, "web-teen-solution1");
         solutionwebteen.addProduct(products2p2);
         solutionwebteen.addProduct(products2p1);
 //        solutionwebteen.setTotalPrice(500);
 
         MasterSolutionOrderList msol = business.getMasterSolutionOrderList(); // create MasterSolutionOrderList
 
-        SolutionOrder so11 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile,solutiontvteen, tvchannelteenmarket, 144500, 1); // add solutionOrders to masterSolutionOrderList
-        SolutionOrder so12 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile,solutiontvteen, tvchannelteenmarket, 144500, 1); // use uneven combinations of customers, salespersons, markets, etc so that we have top 3 customers, top 3 salespersons
-        SolutionOrder so13 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile,solutiontvteen, tvchannelteenmarket, 144500, 1);
-        
-        SolutionOrder so2 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile,solutionwebteen, webchannelteenmarket, 150000, 1); // end of data generation
-        
+        SolutionOrder so21 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionwebteen, webchannelteenmarket, 160000, 1); // end of data generation
+        SolutionOrder so22 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionwebteen, webchannelteenmarket, 160000, 1); // end of data generation
+        SolutionOrder so23 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionwebteen, webchannelteenmarket, 160000, 1); // end of data generation
+        SolutionOrder so24 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionwebteen, webchannelteenmarket, 160000, 1); // end of data generation
+        SolutionOrder so25 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionwebteen, webchannelteenmarket, 160000, 1); // end of data generation
+        SolutionOrder so26 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionwebteen, webchannelteenmarket, 160000, 1); // end of data generation
+        SolutionOrder so27 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionwebteen, webchannelteenmarket, 160000, 1); // end of data generation
+
+        SolutionOrder so11 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile, solutiontvteen, tvchannelteenmarket, 144500, 1); // add solutionOrders to masterSolutionOrderList
+        SolutionOrder so12 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile, solutiontvteen, tvchannelteenmarket, 144500, 1); // use uneven combinations of customers, salespersons, markets, etc so that we have top 3 customers, top 3 salespersons
+        SolutionOrder so13 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile, solutiontvteen, tvchannelteenmarket, 144500, 1);
+
         int tvteenRevenue = msol.getRevenueByMarketChannelCombo(tvchannelteenmarket);
         int webteenRevenue = msol.getRevenueByMarketChannelCombo(webchannelteenmarket);
         int tvRevenue = msol.getRevenueByChannel(tvchannel);
         int webRevenue = msol.getRevenueByChannel(webchannel);
-        int solutionwebteenRevenue = solutionwebteen.getSolutionOfferPricePerformance();
-        int solutiontvteenRevenue = solutiontvteen.getSolutionOfferPricePerformance();
-        
-        System.out.println("revenue by tv-teen"+ tvteenRevenue);
-        System.out.println("revenue by web-teen"+ webteenRevenue);
-        System.out.println("revenue by tv"+ tvRevenue);
-        System.out.println("revenue by web"+ webRevenue);
-        System.out.println("priceperformance of solutionwebteen"+ solutionwebteenRevenue);
-        System.out.println("priceperformance of solutiontvteen"+ solutiontvteenRevenue);
-     
+//        int solutionwebteenRevenue = solutionwebteen.getSolutionOfferPricePerformance();
+//        int solutiontvteenRevenue = solutiontvteen.getSolutionOfferPricePerformance();
+
+        System.out.println("revenue by tv-teen" + tvteenRevenue);
+        System.out.println("revenue by web-teen" + webteenRevenue);
+        System.out.println("revenue by tv" + tvRevenue);
+        System.out.println("revenue by web" + webRevenue);
+//        System.out.println("priceperformance of solutionwebteen"+ solutionwebteenRevenue);
+//        System.out.println("priceperformance of solutiontvteen"+ solutiontvteenRevenue);
+
 //        Usecase 1
+//        for(SolutionOffer so: webchannelteenmarket.getTop3Solutions()) {
+//            System.out.println("so: "+so.getName());
+//        }
+        Map<Market, ArrayList<SolutionOffer>> top3solutions = mccc.getTop3SolutionsOfEachMarkets();
+
+        for (Map.Entry<Market, ArrayList<SolutionOffer>> entry : top3solutions.entrySet()) {
+            System.out.println("---Market: " + entry.getKey().getName() + "----");
+//            entry.getValue().sort(new SolutionOfferComparator());
+            for (SolutionOffer so : entry.getValue()) {
+                System.out.println("Solution Offer name: " + so.getName() + " Frequency of orders above target: " + so.getFrequencyAboveTarget());
+            }
+        }
+//          for(SolutionOffer so: mccc.getTop3SolutionsByMarket(teenmarket)) {
+//              System.out.println(so.getName());
+//          }
 
 //        Usecase 2
         CustomersReport cr = customedirectory.generatCustomerPerformanceReport();
         ArrayList<CustomerSummary> sorted = cr.getSummariesSortedFrequencyAboveTarget();
-        
-        for (CustomerSummary cs: sorted) {
-            System.out.println("Customer ID:"+cs.getCustomer().getCustomerId()+"Solution Orders Above Target"+cs.getFrequencyOfSolutionOrdersAboveTarget());
+
+        for (CustomerSummary cs : sorted) {
+            System.out.println("Customer ID: " + cs.getCustomer().getCustomerId() + " Solution Orders Above Target: " + cs.getFrequencyOfSolutionOrdersAboveTarget());
         }
-        
+
 //        Usecase 3
         SalesPersonsReport spr = salespersondirectory.generateSalesPersonsReport();
         ArrayList<SalesPersonSummary> sortedSales = spr.getSummariesSortedByFrequencyAboveTarget();
-        
-        for (SalesPersonSummary ss: sortedSales) {
-            System.out.println("SalesPerson ID:"+ss.getSalesPerson().getPerson().getPersonId()+"Solution Orders Above Target"+ss.getFrequencyOfSolutionOrdersAboveTarget());
+
+        for (SalesPersonSummary ss : sortedSales) {
+            System.out.println("SalesPerson ID:" + ss.getSalesPerson().getPerson().getPersonId() + " Solution Orders Above Target: " + ss.getFrequencyOfSolutionOrdersAboveTarget());
         }
-        
+
 //        Usecase 4
         Map<Integer, Market> map = mccc.getPricePerformanceOfEachMarkets();
-        
-        for(Map.Entry<Integer, Market> entry: map.entrySet()) {
-            System.out.println("Market Name:" +entry.getValue().getName() +"Revenue: "+entry.getKey());
+
+        for (Map.Entry<Integer, Market> entry : map.entrySet()) {
+            System.out.println("Market Name:" + entry.getValue().getName() + " Revenue: " + entry.getKey());
         }
-        
+
         return business;
 
     }

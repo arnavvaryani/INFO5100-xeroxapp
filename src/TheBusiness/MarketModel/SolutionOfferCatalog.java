@@ -19,11 +19,11 @@ public class SolutionOfferCatalog {
         solutionoffers = new ArrayList();
     }
     
-    public SolutionOffer newSolutionOffer(MarketChannelAssignment mca){
+    public SolutionOffer newSolutionOffer(MarketChannelAssignment mca, String name){
         
-        SolutionOffer so = new SolutionOffer(mca);
+        SolutionOffer so = new SolutionOffer(mca, name);
         solutionoffers.add(so);
-        mca.addSolutionOffer(so);
+//        mca.addSolutionOffer(so);
         
         return so;
     }

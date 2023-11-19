@@ -14,6 +14,7 @@ import TheBusiness.SolutionOrders.SolutionOrder;
  * @author kal bugrara
  */
 public class SolutionOffer {
+    String name;
     ArrayList<Product> products;
     int targetPrice, floorPrice, ceilingPrice;//floor, ceiling, and target ideas
     String ad;
@@ -21,7 +22,8 @@ public class SolutionOffer {
     ArrayList<SolutionOrder> solutionorders;
     
     
-    public SolutionOffer(MarketChannelAssignment m){
+    public SolutionOffer(MarketChannelAssignment m, String name){
+        this.name = name;
         marketchannelcomb = m;
         products = new ArrayList();
         solutionorders = new ArrayList();
@@ -52,6 +54,10 @@ public class SolutionOffer {
 //    public int getSolutionPrice(){
 //        return price;
 //    }
+
+    public String getName() {
+        return name;
+    }
 
     public int getTargetPrice() {
         return targetPrice;
@@ -95,7 +101,7 @@ public class SolutionOffer {
         return sum;
     }
     
-    public int frequencyAboveTarget() {
+    public int getFrequencyAboveTarget() {
         int sum = 0;
         for(SolutionOrder so: solutionorders){
             if ( so.isActualAboveTarget() ){
@@ -105,7 +111,7 @@ public class SolutionOffer {
         return sum;
     }
     
-    public int frequencyBelowTarget() {
+    public int getFrequencyBelowTarget() {
         int sum = 0;
         for(SolutionOrder so: solutionorders){
             if ( so.isActualBelowTarget() ){
