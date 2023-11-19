@@ -6,6 +6,7 @@
 package TheBusiness.MarketModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -80,4 +81,23 @@ public class MarketChannelComboCatalog {
         return MarketsAndPricePerformances.descendingMap();
     }
     
+    public ArrayList<SolutionOffer> getTop3SolutionsByMarket(Market m) {
+        ArrayList<SolutionOffer> MarketsAndSolutions = new ArrayList<>();
+        for (MarketChannelAssignment mca: mcalist) {
+            if(mca.isMarketMatch(m)) {
+                MarketsAndSolutions.addAll(mca.getTop3Solutions());
+            }
+        }
+        MarketsAndSolutions.sort(new SolutionOfferComparator());
+        return MarketsAndSolutions;
+    }
+    
+    public Map<Market, ArrayList<SolutionOffer>> getTop3SolutionsOfEachMarkets() {
+        HashMap<Market, ArrayList<SolutionOffer>> MarketsAndSolutionOffers = new HashMap<>();
+        for (Market m: markets) {
+                MarketsAndSolutionOffers.put(m, getTop3SolutionsByMarket(m));
+        }
+        return MarketsAndSolutionOffers;
+    }
+ 
 }
