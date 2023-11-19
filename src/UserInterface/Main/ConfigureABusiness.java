@@ -177,6 +177,7 @@ class ConfigureABusiness {
         Person xeroxmarketingperson001 = persondirectory.newPerson("Xerox marketing");
         Person teencustomerperson001 = persondirectory.newPerson("teen customer001");
         Person teencustomerperson002 = persondirectory.newPerson("teen customer002");
+        Person xeroxadminperson001 = persondirectory.newPerson("xerox admin");
 
 // Create Customers
         CustomerDirectory customedirectory = business.getCustomerDirectory(); // create CustomerDirectory
