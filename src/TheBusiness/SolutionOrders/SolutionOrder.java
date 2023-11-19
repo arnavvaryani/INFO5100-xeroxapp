@@ -38,6 +38,14 @@ public class SolutionOrder {
         this.id = generateOrderID();
     }
 
+    public SolutionOffer getSelectedsolutionoffer() {
+        return selectedsolutionoffer;
+    }
+
+    public void setSelectedsolutionoffer(SolutionOffer selectedsolutionoffer) {
+        this.selectedsolutionoffer = selectedsolutionoffer;
+    }
+
     public int getActualPrice() {
         return actualPrice;
     }
