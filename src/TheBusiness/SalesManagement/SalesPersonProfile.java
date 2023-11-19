@@ -27,6 +27,23 @@ public class SalesPersonProfile extends Profile {
         solutionorders = new ArrayList();
 
     }
+
+    public ArrayList<Order> getSalesorders() {
+        return salesorders;
+    }
+
+    public void setSalesorders(ArrayList<Order> salesorders) {
+        this.salesorders = salesorders;
+    }
+
+    public ArrayList<SolutionOrder> getSolutionorders() {
+        return solutionorders;
+    }
+
+    public void setSolutionorders(ArrayList<SolutionOrder> solutionorders) {
+        this.solutionorders = solutionorders;
+    }
+    
     public void addSalesOrder(Order o){
         salesorders.add(o);
     }
