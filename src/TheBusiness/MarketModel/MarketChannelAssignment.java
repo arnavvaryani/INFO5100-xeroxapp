@@ -48,6 +48,14 @@ public class MarketChannelAssignment {
         return sum;
     }
     
+    public ArrayList<SolutionOffer> getTop3Solutions() {
+        if(solutionofferlist.size() > 3) {
+            solutionofferlist.sort(new SolutionOfferComparator());
+            solutionofferlist.subList(0, 2);
+        }
+        return solutionofferlist;
+    }
+    
     public boolean matches(Market m, Channel c) {
 
         if (market == m && channel == c) {

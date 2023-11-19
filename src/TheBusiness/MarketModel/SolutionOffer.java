@@ -14,19 +14,22 @@ import TheBusiness.SolutionOrders.SolutionOrder;
  * @author kal bugrara
  */
 public class SolutionOffer {
+    String name;
     ArrayList<Product> products;
-    int targetPrice, floorPrice, ceilingPrice;//floor, ceiling, and target ideas
+    int targetPrice, floorPrice, ceilingPrice, suggestedPrice;//floor, ceiling, and target ideas
     String ad;
     MarketChannelAssignment marketchannelcomb;
     ArrayList<SolutionOrder> solutionorders;
     
     
-    public SolutionOffer(MarketChannelAssignment m){
+    public SolutionOffer(MarketChannelAssignment m, String name){
+        this.name = name;
         marketchannelcomb = m;
         products = new ArrayList();
         solutionorders = new ArrayList();
         m.addSolutionOffer(this); 
         calcFTCprices();
+        suggestedPrice = targetPrice;
     } 
     
     private void calcFTCprices () {
@@ -52,6 +55,10 @@ public class SolutionOffer {
 //    public int getSolutionPrice(){
 //        return price;
 //    }
+
+    public String getName() {
+        return name;
+    }
 
     public int getTargetPrice() {
         return targetPrice;
@@ -95,7 +102,7 @@ public class SolutionOffer {
         return sum;
     }
     
-    public int frequencyAboveTarget() {
+    public int getFrequencyAboveTarget() {
         int sum = 0;
         for(SolutionOrder so: solutionorders){
             if ( so.isActualAboveTarget() ){
@@ -105,7 +112,7 @@ public class SolutionOffer {
         return sum;
     }
     
-    public int frequencyBelowTarget() {
+    public int getFrequencyBelowTarget() {
         int sum = 0;
         for(SolutionOrder so: solutionorders){
             if ( so.isActualBelowTarget() ){
@@ -117,6 +124,13 @@ public class SolutionOffer {
     
     public void addSolutionOrder(SolutionOrder so){
         solutionorders.add(so);
+        suggestedPrice = calculateSuggestedPrice();
+    }
+    
+    public int calculateSuggestedPrice() {
+        int averagePerformance = Math.floorDiv(getSolutionOfferPricePerformance(), solutionorders.size());
+        this.suggestedPrice = targetPrice + averagePerformance;
+        return suggestedPrice;
     }
     // this will allow one to retrieve all offers meant for this market/channel combo
     public boolean isSolutionOfferMatchMarketChannel(MarketChannelAssignment mca){
@@ -131,5 +145,9 @@ public class SolutionOffer {
         ad = a;
     }
 
+    public int getSuggestedPrice() {
+        return suggestedPrice;
+    }
+    
     
 }
