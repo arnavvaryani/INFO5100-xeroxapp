@@ -329,6 +329,15 @@ class ConfigureABusiness {
             System.out.println("Market Name:" + entry.getValue().getName() + " Revenue: " + entry.getKey());
         }
 
+//        Usecase 5
+        System.out.println("poor performing solutionoffers");
+        for(SolutionOffer so: solutionoffercatalog.poorPerformingSolutionOffers()) {
+            System.out.println("name: "+so.getName()+" target price: " + so.getTargetPrice() +" suggested price: "+so.getSuggestedPrice());
+        }
+        System.out.println("good performing solutionoffers");
+        for(SolutionOffer so: solutionoffercatalog.goodPerformingSolutionOffers()) {
+            System.out.println("name: "+so.getName()+" target price: " + so.getTargetPrice() +" suggested price: "+so.getSuggestedPrice());
+        }
         return business;
 
     }

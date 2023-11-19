@@ -16,7 +16,7 @@ import TheBusiness.SolutionOrders.SolutionOrder;
 public class SolutionOffer {
     String name;
     ArrayList<Product> products;
-    int targetPrice, floorPrice, ceilingPrice;//floor, ceiling, and target ideas
+    int targetPrice, floorPrice, ceilingPrice, suggestedPrice;//floor, ceiling, and target ideas
     String ad;
     MarketChannelAssignment marketchannelcomb;
     ArrayList<SolutionOrder> solutionorders;
@@ -29,6 +29,7 @@ public class SolutionOffer {
         solutionorders = new ArrayList();
         m.addSolutionOffer(this); 
         calcFTCprices();
+        suggestedPrice = targetPrice;
     } 
     
     private void calcFTCprices () {
@@ -123,6 +124,13 @@ public class SolutionOffer {
     
     public void addSolutionOrder(SolutionOrder so){
         solutionorders.add(so);
+        suggestedPrice = calculateSuggestedPrice();
+    }
+    
+    public int calculateSuggestedPrice() {
+        int averagePerformance = Math.floorDiv(getSolutionOfferPricePerformance(), solutionorders.size());
+        this.suggestedPrice = targetPrice + averagePerformance;
+        return suggestedPrice;
     }
     // this will allow one to retrieve all offers meant for this market/channel combo
     public boolean isSolutionOfferMatchMarketChannel(MarketChannelAssignment mca){
@@ -137,5 +145,9 @@ public class SolutionOffer {
         ad = a;
     }
 
+    public int getSuggestedPrice() {
+        return suggestedPrice;
+    }
+    
     
 }

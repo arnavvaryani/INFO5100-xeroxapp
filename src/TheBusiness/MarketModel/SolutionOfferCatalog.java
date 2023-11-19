@@ -28,6 +28,25 @@ public class SolutionOfferCatalog {
         return so;
     }
     
+    public ArrayList<SolutionOffer> goodPerformingSolutionOffers() {
+        ArrayList<SolutionOffer> goodPerformingSolutionOffers = new ArrayList<>();
+        for (SolutionOffer so: solutionoffers) {
+            if (so.getSuggestedPrice() > so.getTargetPrice()) {
+                goodPerformingSolutionOffers.add(so);
+            }
+        }
+        return goodPerformingSolutionOffers;
+    }
+    
+    public ArrayList<SolutionOffer> poorPerformingSolutionOffers() {
+        ArrayList<SolutionOffer> poorPerformingSolutionOffers = new ArrayList<>();
+        for (SolutionOffer so: solutionoffers) {
+            if (so.getSuggestedPrice() < so.getTargetPrice()) {
+                poorPerformingSolutionOffers.add(so);
+            }
+        }
+        return poorPerformingSolutionOffers;
+    }
     
 
     //return all solution offers that match m/c combination
