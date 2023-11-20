@@ -290,9 +290,6 @@ class ConfigureABusiness {
 //        System.out.println("priceperformance of solutiontvteen"+ solutiontvteenRevenue);
 
 //        Usecase 1
-//        for(SolutionOffer so: webchannelteenmarket.getTop3Solutions()) {
-//            System.out.println("so: "+so.getName());
-//        }
         Map<Market, ArrayList<SolutionOffer>> top3solutions = mccc.getTop3SolutionsOfEachMarkets();
 
         for (Map.Entry<Market, ArrayList<SolutionOffer>> entry : top3solutions.entrySet()) {
@@ -302,9 +299,6 @@ class ConfigureABusiness {
                 System.out.println("Solution Offer name: " + so.getName() + " Frequency of orders above target: " + so.getFrequencyAboveTarget());
             }
         }
-//          for(SolutionOffer so: mccc.getTop3SolutionsByMarket(teenmarket)) {
-//              System.out.println(so.getName());
-//          }
 
 //        Usecase 2
         CustomersReport cr = customedirectory.generatCustomerPerformanceReport();
