@@ -6,6 +6,8 @@
 package TheBusiness.CustomerManagement;
 
 import TheBusiness.Business.Business;
+import TheBusiness.MarketModel.Channel;
+import TheBusiness.MarketModel.Market;
 import TheBusiness.Personnel.Person;
 import java.util.ArrayList;
 
@@ -25,9 +27,9 @@ public class CustomerDirectory {
 
     }
 
-    public CustomerProfile newCustomerProfile(Person p) {
+    public CustomerProfile newCustomerProfile(Person p, Channel channel, Market m) {
 
-        CustomerProfile sp = new CustomerProfile(p);
+        CustomerProfile sp = new CustomerProfile(p, channel, m);
         customerlist.add(sp);
         return sp;
     }

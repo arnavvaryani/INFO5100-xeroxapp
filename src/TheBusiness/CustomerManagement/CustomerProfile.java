@@ -5,6 +5,7 @@
  */
 package TheBusiness.CustomerManagement;
 
+import TheBusiness.MarketModel.Channel;
 import java.util.ArrayList;
 import TheBusiness.MarketModel.Market;
 import TheBusiness.OrderManagement.Order;
@@ -19,37 +20,50 @@ import TheBusiness.SolutionOrders.SolutionOrder;
 public class CustomerProfile extends Profile {
 
     ArrayList<Order> orders;
-    ArrayList<Market> markets;
+    Market market;
     ArrayList<SolutionOrder> solutionOrders;
     Person person;
+    Channel channel;
 
-    public CustomerProfile(Person p) {
+    public CustomerProfile(Person p, Channel channel, Market market) {
         super(p);
         person = p;
         orders = new ArrayList();
         solutionOrders = new ArrayList();
+        this.channel = channel;
+        this.market = market;
     }
-    
-    @Override
-    public String getRole(){
-//        return "Sales";
-        return "Customer";
+
+    public Channel getChannel() {
+        return channel;
     }
-    
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+    public Market getMarket() {
+        return market;
+    }
+
+    public void setMarket(Market market) {
+        this.market = market;
+    }
+
     public int getTotalPricePerformance() {
 
         //for each order in the customer orderlist 
         //calculate order price performance and add it to the sum
         int sum = 0;
-        for (Order o: orders) {
+        for (Order o : orders) {
             sum += o.getOrderPricePerformance();
         }
         return sum;
     }
-    
+
     public int getTotalPricePerforamanceSolution() {
         int sum = 0;
-        for (SolutionOrder so: solutionOrders) {
+        for (SolutionOrder so : solutionOrders) {
 //            sum += so.getOrderPricePerformance();
         }
         return sum;
@@ -79,7 +93,7 @@ public class CustomerProfile extends Profile {
 
         return sum;
     }
-    
+
     public int FrequencyOfSolutionOrdersAboveTarget() {
         //for each order in the customer order list 
         //calculate if order is positive (actual order total is greater than sum of item targets
@@ -104,7 +118,7 @@ public class CustomerProfile extends Profile {
 
         return sum;
     }
-    
+
     public int FrequencyOfSolutionOrdersAtTarget() {
         int sum = 0;
         for (SolutionOrder so : solutionOrders) {
@@ -129,22 +143,17 @@ public class CustomerProfile extends Profile {
     public void addCustomerOrder(Order o) {
         orders.add(o);
     }
-    
+
     public void addCustomerSolutionOrder(SolutionOrder so) {
         solutionOrders.add(so);
     }
-    
+
     public int getSolutionOrdersTotal() {
         int sum = 0;
-        for (SolutionOrder so: solutionOrders) {
+        for (SolutionOrder so : solutionOrders) {
             sum += so.getActualPrice();
         }
         return sum;
-    }
-
-    @Override
-    public String toString() {
-        return person.getPersonId();
     }
 
     public String getCustomerId() {
@@ -155,4 +164,14 @@ public class CustomerProfile extends Profile {
         return person;
     }
 
+    @Override
+    public String getRole() {
+//        return "Sales";
+        return "Customer";
+    }
+
+    @Override
+    public String toString() {
+        return person.getPersonId();
+    }
 }
