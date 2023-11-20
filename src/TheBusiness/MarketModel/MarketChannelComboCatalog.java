@@ -82,14 +82,14 @@ public class MarketChannelComboCatalog {
     }
     
     public ArrayList<SolutionOffer> getTop3SolutionsByMarket(Market m) {
-        ArrayList<SolutionOffer> MarketsAndSolutions = new ArrayList<>();
+        ArrayList<SolutionOffer> top3Solutions = new ArrayList<>();
         for (MarketChannelAssignment mca: mcalist) {
             if(mca.isMarketMatch(m)) {
-                MarketsAndSolutions.addAll(mca.getTop3Solutions());
+                top3Solutions.addAll(mca.getTop3Solutions());
             }
         }
-        MarketsAndSolutions.sort(new SolutionOfferComparator());
-        return MarketsAndSolutions;
+        top3Solutions.sort(new SolutionOfferComparator());
+        return top3Solutions;
     }
     
     public Map<Market, ArrayList<SolutionOffer>> getTop3SolutionsOfEachMarkets() {

@@ -170,15 +170,24 @@ class ConfigureABusiness {
         Person xeroxbusinessmanager001 = persondirectory.newPerson("Xerox businessmanager"); // load PersonDirectory with at least 12 persons (1 businessManager, 1 MarketingManager, 5 SalesPerson, 5 Customers)
         Person xeroxsalesperson001 = persondirectory.newPerson("Xerox sales001");
         Person xeroxsalesperson002 = persondirectory.newPerson("Xerox sales002");
+        Person xeroxsalesperson003 = persondirectory.newPerson("Xerox sales003");
+        Person xeroxsalesperson004 = persondirectory.newPerson("Xerox sales004");
+        Person xeroxsalesperson005 = persondirectory.newPerson("Xerox sales005");
         Person xeroxmarketingperson001 = persondirectory.newPerson("Xerox marketing");
-        Person teencustomerperson001 = persondirectory.newPerson("teen customer001");
-        Person teencustomerperson002 = persondirectory.newPerson("teen customer002");
+        Person genzcustomerperson = persondirectory.newPerson("genz customer001");
+        Person millenialcustomerperson = persondirectory.newPerson("millenial customer001");
+        Person genxcustomerperson = persondirectory.newPerson("genx customer001");
+        Person boomercustomerperson = persondirectory.newPerson("boomer customer001");
+//        Person teencustomerperson005 = persondirectory.newPerson("teen customer005");
         Person xeroxadminperson001 = persondirectory.newPerson("xerox admin");
 
 // Create Sales people
         SalesPersonDirectory salespersondirectory = business.getSalesPersonDirectory(); // create SalesPersonDirectory
         SalesPersonProfile salesperson1profile = salespersondirectory.newSalesPersonProfile(xeroxsalesperson001); // load SalesPersonDirectory with at least 5 profiles
         SalesPersonProfile salesperson2profile = salespersondirectory.newSalesPersonProfile(xeroxsalesperson002);
+        SalesPersonProfile salesperson3profile = salespersondirectory.newSalesPersonProfile(xeroxsalesperson003);
+        SalesPersonProfile salesperson4profile = salespersondirectory.newSalesPersonProfile(xeroxsalesperson004);
+        SalesPersonProfile salesperson5profile = salespersondirectory.newSalesPersonProfile(xeroxsalesperson005);
 
         // Create Marketing people
         MarketingPersonDirectory marketingpersondirectory = business.getMarketingPersonDirectory(); //create MarketingPersonDirectory
@@ -217,6 +226,9 @@ class ConfigureABusiness {
         UserAccountDirectory uadirectory = business.getUserAccountDirectory(); // Create userAccountDirectory 
         UserAccount ua1 = uadirectory.newUserAccount(salesperson1profile, "Sales001", "XXXX"); // load userAccountDirectory with 5 salesPersonprofiles, 1 marketing person profile, 1 business manager profile
         UserAccount ua12 = uadirectory.newUserAccount(salesperson2profile, "Sales002", "XXXX");
+        UserAccount ua13 = uadirectory.newUserAccount(salesperson2profile, "Sales003", "XXXX");
+        UserAccount ua14 = uadirectory.newUserAccount(salesperson2profile, "Sales004", "XXXX");
+        UserAccount ua15 = uadirectory.newUserAccount(salesperson2profile, "Sales005", "XXXX");
         UserAccount ua2 = uadirectory.newUserAccount(marketingpersonprofile0, "Marketing", "XXXX");
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "Admin", "XXXX"); /// order products for one of the customers and performed by a sales person
 
@@ -248,93 +260,146 @@ class ConfigureABusiness {
 
         SolutionOfferCatalog solutionoffercatalog = business.getSolutionOfferCatalog(); // create SolutionOfferCatalog
 
-        SolutionOffer solutionsocialmediateen = solutionoffercatalog.newSolutionOffer(genzmca, "socialmedia-genz-solution1"); // add solutionOffering for every marketchannelassignment created above
-        solutionsocialmediateen.addProduct(products2p2); // add few products to the solutionOffering
-        solutionsocialmediateen.addProduct(products2p1);
-//        solutiontvteen.setTotalPrice(1000);
+        SolutionOffer solutionsocialmediagenz1 = solutionoffercatalog.newSolutionOffer(genzmca, "sm-genz-so1"); // add solutionOffering for every marketchannelassignment created above
+        solutionsocialmediagenz1.addProduct(products2p2); // add few products to the solutionOffering
+        solutionsocialmediagenz1.addProduct(products2p1);
+        
+        SolutionOffer solutionsocialmediagenz2 = solutionoffercatalog.newSolutionOffer(genzmca, "sm-genz-sol2"); // add solutionOffering for every marketchannelassignment created above
+        solutionsocialmediagenz2.addProduct(products2p2); // add few products to the solutionOffering
+        solutionsocialmediagenz2.addProduct(products2p1);
+        
+        SolutionOffer solutionsocialmediagenz3 = solutionoffercatalog.newSolutionOffer(genzmca, "sm-genz-sol3"); // add solutionOffering for every marketchannelassignment created above
+        solutionsocialmediagenz3.addProduct(products2p2); // add few products to the solutionOffering
+        solutionsocialmediagenz3.addProduct(products2p1);
 
-        SolutionOffer solutionmillenialweb = solutionoffercatalog.newSolutionOffer(millenialmca, "web-millenial-solution1");
-        solutionmillenialweb.addProduct(products2p2);
-        solutionmillenialweb.addProduct(products2p1);
-//        solutionwebteen.setTotalPrice(500);
+        SolutionOffer solutionmillenialweb1 = solutionoffercatalog.newSolutionOffer(millenialmca, "web-millenial-sol1");
+        solutionmillenialweb1.addProduct(products2p2);
+        solutionmillenialweb1.addProduct(products2p1);
+        
+        SolutionOffer solutionmillenialweb2 = solutionoffercatalog.newSolutionOffer(millenialmca, "web-millenial-sol2");
+        solutionmillenialweb2.addProduct(products2p2);
+        solutionmillenialweb2.addProduct(products2p1);
+        
+        SolutionOffer solutionmillenialweb3 = solutionoffercatalog.newSolutionOffer(millenialmca, "web-millenial-sol3");
+        solutionmillenialweb3.addProduct(products2p2);
+        solutionmillenialweb3.addProduct(products2p1);
+        
+        SolutionOffer solutiongenxtv1 = solutionoffercatalog.newSolutionOffer(genxmca, "tv-genx-sol1");
+        solutiongenxtv1.addProduct(products2p2);
+        solutiongenxtv1.addProduct(products2p1);
+        
+        SolutionOffer solutiongenxtv2 = solutionoffercatalog.newSolutionOffer(genxmca, "tv-genx-sol2");
+        solutiongenxtv2.addProduct(products2p2);
+        solutiongenxtv2.addProduct(products2p1);
+        
+        SolutionOffer solutiongenxtv3 = solutionoffercatalog.newSolutionOffer(genxmca, "tv-genx-sol3");
+        solutiongenxtv3.addProduct(products2p2);
+        solutiongenxtv3.addProduct(products2p1);
 
+        SolutionOffer solutionboomerradio1 = solutionoffercatalog.newSolutionOffer(boomermca, "radio-boomer-sol1");
+        solutionboomerradio1.addProduct(products2p2);
+        solutionboomerradio1.addProduct(products2p1);
+        
+        SolutionOffer solutionboomerradio2 = solutionoffercatalog.newSolutionOffer(boomermca, "radio-boomer-sol2");
+        solutionboomerradio2.addProduct(products2p2);
+        solutionboomerradio2.addProduct(products2p1);
+        
+        SolutionOffer solutionboomerradio3 = solutionoffercatalog.newSolutionOffer(boomermca, "radio-boomer-sol3");
+        solutionboomerradio3.addProduct(products2p2);
+        solutionboomerradio3.addProduct(products2p1);
+        
         MasterSolutionOrderList msol = business.getMasterSolutionOrderList(); // create MasterSolutionOrderList
 
         // Create Customers
         CustomerDirectory customedirectory = business.getCustomerDirectory(); // create CustomerDirectory
 //        CustomerProfile customerprofile1 = customedirectory.newCustomerProfile(xeroxsalesperson001);
-        CustomerProfile teencustomerprofile001 = customedirectory.newCustomerProfile(teencustomerperson001, socialmediachannel, genzMarket); // load CustomerDirectory
-        CustomerProfile teencustomerprofile002 = customedirectory.newCustomerProfile(teencustomerperson002, webchannel, millenialMarket);
+        CustomerProfile genzcustomer = customedirectory.newCustomerProfile(genzcustomerperson, socialmediachannel, genzMarket); // load CustomerDirectory
+        CustomerProfile millenialcustomer = customedirectory.newCustomerProfile(millenialcustomerperson, webchannel, millenialMarket);
+        CustomerProfile genxcustomer = customedirectory.newCustomerProfile(genxcustomerperson, tvchannel, genxMarket);
+        CustomerProfile boomercustomer = customedirectory.newCustomerProfile(boomercustomerperson, radiochannel, boomerMarket);
 
-        SolutionOrder so21 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionmillenialweb, millenialmca, 160000, 1); // end of data generation
-        SolutionOrder so22 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionmillenialweb, millenialmca, 160000, 1); // end of data generation
-        SolutionOrder so23 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionmillenialweb, millenialmca, 160000, 1); // end of data generation
-        SolutionOrder so24 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionmillenialweb, millenialmca, 160000, 1); // end of data generation
-        SolutionOrder so25 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionmillenialweb, millenialmca, 160000, 1); // end of data generation
-        SolutionOrder so26 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionmillenialweb, millenialmca, 160000, 1); // end of data generation
-        SolutionOrder so27 = msol.newSolutionOrder(teencustomerprofile002, salesperson2profile, solutionmillenialweb, millenialmca, 160000, 1); // end of data generation
+        SolutionOrder so21 = msol.newSolutionOrder(millenialcustomer, salesperson2profile, solutionmillenialweb1, millenialmca, 160000, 1); // end of data generation
+        SolutionOrder so22 = msol.newSolutionOrder(millenialcustomer, salesperson2profile, solutionmillenialweb1, millenialmca, 160000, 1); // end of data generation
+        SolutionOrder so23 = msol.newSolutionOrder(millenialcustomer, salesperson2profile, solutionmillenialweb1, millenialmca, 160000, 1); // end of data generation
+        SolutionOrder so24 = msol.newSolutionOrder(millenialcustomer, salesperson2profile, solutionmillenialweb2, millenialmca, 160000, 1); // end of data generation
+        SolutionOrder so25 = msol.newSolutionOrder(millenialcustomer, salesperson2profile, solutionmillenialweb2, millenialmca, 160000, 1); // end of data generation
+        SolutionOrder so26 = msol.newSolutionOrder(millenialcustomer, salesperson2profile, solutionmillenialweb3, millenialmca, 160000, 1); // end of data generation
+        SolutionOrder so27 = msol.newSolutionOrder(millenialcustomer, salesperson2profile, solutionmillenialweb3, millenialmca, 160000, 1); // end of data generation
 
-        SolutionOrder so11 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile, solutionsocialmediateen, genzmca, 144500, 1); // add solutionOrders to masterSolutionOrderList
-        SolutionOrder so12 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile, solutionsocialmediateen, genzmca, 144500, 1); // use uneven combinations of customers, salespersons, markets, etc so that we have top 3 customers, top 3 salespersons
-        SolutionOrder so13 = msol.newSolutionOrder(teencustomerprofile001, salesperson1profile, solutionsocialmediateen, genzmca, 144500, 1);
+        SolutionOrder so11 = msol.newSolutionOrder(genzcustomer, salesperson1profile, solutionsocialmediagenz2, genzmca, 174500, 1); // add solutionOrders to masterSolutionOrderList
+        SolutionOrder so12 = msol.newSolutionOrder(genzcustomer, salesperson1profile, solutionsocialmediagenz2, genzmca, 154500, 1); // use uneven combinations of customers, salespersons, markets, etc so that we have top 3 customers, top 3 salespersons
+        SolutionOrder so13 = msol.newSolutionOrder(genzcustomer, salesperson1profile, solutionsocialmediagenz1, genzmca, 154100, 1);
+        SolutionOrder so14 = msol.newSolutionOrder(genzcustomer, salesperson1profile, solutionsocialmediagenz3, genzmca, 130000, 1);
+        
+        SolutionOrder so31 = msol.newSolutionOrder(genxcustomer, salesperson3profile, solutiongenxtv3, genxmca, 140000, 1); // add solutionOrders to masterSolutionOrderList
+        SolutionOrder so32 = msol.newSolutionOrder(genxcustomer, salesperson3profile, solutiongenxtv3, genxmca, 145000, 1); // use uneven combinations of customers, salespersons, markets, etc so that we have top 3 customers, top 3 salespersons
+        SolutionOrder so33 = msol.newSolutionOrder(genxcustomer, salesperson3profile, solutiongenxtv1, genxmca, 170000, 1);
+        SolutionOrder so34 = msol.newSolutionOrder(genxcustomer, salesperson3profile, solutiongenxtv2, genxmca, 170000, 1);
+        
+        SolutionOrder so41 = msol.newSolutionOrder(boomercustomer, salesperson4profile, solutionboomerradio1, boomermca, 150000, 1);
+        SolutionOrder so42 = msol.newSolutionOrder(boomercustomer, salesperson4profile, solutionboomerradio2, boomermca, 141000, 1);
+        SolutionOrder so43 = msol.newSolutionOrder(boomercustomer, salesperson4profile, solutionboomerradio3, boomermca, 139000, 1);
+//        SolutionOrder so34 = msol.newSolutionOrder(genxcustomer, salesperson3profile, solutiongenxtv3, genzmca, 130000, 1);
+        
+        
+        
+//        int genxsocialmediarevenue = msol.getRevenueByMarketChannelCombo(millenialmca);
+//        int millenialwebrevenue = msol.getRevenueByMarketChannelCombo(millenialmca);
+//        int tvRevenue = msol.getRevenueByChannel(tvchannel);
+//        int webRevenue = msol.getRevenueByChannel(webchannel);
+//        int solutionwebteenRevenue = solutionmillenialweb.getSolutionOfferPricePerformance();
+//        int solutionsocialmediateenRevenue = solutionsocialmediateen.getSolutionOfferPricePerformance();
 
-        int genxsocialmediarevenue = msol.getRevenueByMarketChannelCombo(millenialmca);
-        int millenialwebrevenue = msol.getRevenueByMarketChannelCombo(millenialmca);
-        int tvRevenue = msol.getRevenueByChannel(tvchannel);
-        int webRevenue = msol.getRevenueByChannel(webchannel);
-        int solutionwebteenRevenue = solutionmillenialweb.getSolutionOfferPricePerformance();
-        int solutionsocialmediateenRevenue = solutionsocialmediateen.getSolutionOfferPricePerformance();
+//        System.out.println("revenue by tv-teen" + genxsocialmediarevenue);
+//        System.out.println("revenue by web-teen" + millenialwebrevenue);
+//        System.out.println("revenue by tv" + tvRevenue);
+//        System.out.println("revenue by web" + webRevenue);
+//        System.out.println("priceperformance of solutionwebteen"+ solutionwebteenRevenue);
+//        System.out.println("priceperformance of solutiontvteen"+ solutionsocialmediateenRevenue);
 
-        System.out.println("revenue by tv-teen" + genxsocialmediarevenue);
-        System.out.println("revenue by web-teen" + millenialwebrevenue);
-        System.out.println("revenue by tv" + tvRevenue);
-        System.out.println("revenue by web" + webRevenue);
-        System.out.println("priceperformance of solutionwebteen"+ solutionwebteenRevenue);
-        System.out.println("priceperformance of solutiontvteen"+ solutionsocialmediateenRevenue);
-
-//        Usecase 1
-        Map<Market, ArrayList<SolutionOffer>> top3solutions = mccc.getTop3SolutionsOfEachMarkets();
-
-        for (Map.Entry<Market, ArrayList<SolutionOffer>> entry : top3solutions.entrySet()) {
-            System.out.println("---Market: " + entry.getKey().getName() + "----");
-//            entry.getValue().sort(new SolutionOfferComparator());
-            for (SolutionOffer so : entry.getValue()) {
-                System.out.println("Solution Offer name: " + so.getName() + " Frequency of orders above target: " + so.getFrequencyAboveTarget());
-            }
-        }
-
-//        Usecase 2
-        CustomersReport cr = customedirectory.generatCustomerPerformanceReport();
-        ArrayList<CustomerSummary> sorted = cr.getSummariesSortedFrequencyAboveTarget();
-
-        for (CustomerSummary cs : sorted) {
-            System.out.println("Customer ID: " + cs.getCustomer().getCustomerId() + " Solution Orders Above Target: " + cs.getFrequencyOfSolutionOrdersAboveTarget());
-        }
-
-//        Usecase 3
-        SalesPersonsReport spr = salespersondirectory.generateSalesPersonsReport();
-        ArrayList<SalesPersonSummary> sortedSales = spr.getSummariesSortedByFrequencyAboveTarget();
-
-        for (SalesPersonSummary ss : sortedSales) {
-            System.out.println("SalesPerson ID:" + ss.getSalesPerson().getPerson().getPersonId() + " Solution Orders Above Target: " + ss.getFrequencyOfSolutionOrdersAboveTarget());
-        }
-
-//        Usecase 4
-        Map<Integer, Market> map = mccc.getPricePerformanceOfEachMarkets();
-
-        for (Map.Entry<Integer, Market> entry : map.entrySet()) {
-            System.out.println("Market Name:" + entry.getValue().getName() + " Revenue: " + entry.getKey());
-        }
-
-//        Usecase 5
-        System.out.println("poor performing solutionoffers");
-        for(SolutionOffer so: solutionoffercatalog.poorPerformingSolutionOffers()) {
-            System.out.println("name: "+so.getName()+" target price: " + so.getTargetPrice() +" suggested price: "+so.getSuggestedPrice());
-        }
-        System.out.println("good performing solutionoffers");
-        for(SolutionOffer so: solutionoffercatalog.goodPerformingSolutionOffers()) {
-            System.out.println("name: "+so.getName()+" target price: " + so.getTargetPrice() +" suggested price: "+so.getSuggestedPrice());
-        }
+////        Usecase 1
+//        Map<Market, ArrayList<SolutionOffer>> top3solutions = mccc.getTop3SolutionsOfEachMarkets();
+//
+//        for (Map.Entry<Market, ArrayList<SolutionOffer>> entry : top3solutions.entrySet()) {
+//            System.out.println("---Market: " + entry.getKey().getName() + "----");
+////            entry.getValue().sort(new SolutionOfferComparator());
+//            for (SolutionOffer so : entry.getValue()) {
+//                System.out.println("Solution Offer name: " + so.getName() + " Frequency of orders above target: " + so.getFrequencyAboveTarget());
+//            }
+//        }
+//
+////        Usecase 2
+//        CustomersReport cr = customedirectory.generatCustomerPerformanceReport();
+//        ArrayList<CustomerSummary> sorted = cr.getSummariesSortedFrequencyAboveTarget();
+//
+//        for (CustomerSummary cs : sorted) {
+//            System.out.println("Customer ID: " + cs.getCustomer().getCustomerId() + " Solution Orders Above Target: " + cs.getFrequencyOfSolutionOrdersAboveTarget());
+//        }
+//
+////        Usecase 3
+//        SalesPersonsReport spr = salespersondirectory.generateSalesPersonsReport();
+//        ArrayList<SalesPersonSummary> sortedSales = spr.getSummariesSortedByFrequencyAboveTarget();
+//
+//        for (SalesPersonSummary ss : sortedSales) {
+//            System.out.println("SalesPerson ID:" + ss.getSalesPerson().getPerson().getPersonId() + " Solution Orders Above Target: " + ss.getFrequencyOfSolutionOrdersAboveTarget());
+//        }
+//
+////        Usecase 4
+//        Map<Integer, Market> map = mccc.getPricePerformanceOfEachMarkets();
+//
+//        for (Map.Entry<Integer, Market> entry : map.entrySet()) {
+//            System.out.println("Market Name:" + entry.getValue().getName() + " Revenue: " + entry.getKey());
+//        }
+//
+////        Usecase 5
+//        System.out.println("poor performing solutionoffers");
+//        for(SolutionOffer so: solutionoffercatalog.poorPerformingSolutionOffers()) {
+//            System.out.println("name: "+so.getName()+" target price: " + so.getTargetPrice() +" suggested price: "+so.getSuggestedPrice());
+//        }
+//        System.out.println("good performing solutionoffers");
+//        for(SolutionOffer so: solutionoffercatalog.goodPerformingSolutionOffers()) {
+//            System.out.println("name: "+so.getName()+" target price: " + so.getTargetPrice() +" suggested price: "+so.getSuggestedPrice());
+//        }
         return business;
 
     }

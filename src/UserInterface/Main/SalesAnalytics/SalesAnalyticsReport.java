@@ -41,6 +41,9 @@ public class SalesAnalyticsReport extends javax.swing.JPanel {
     }
 
     public void populateTable1() {
+        System.out.println("Start of Sales Analytics Report");
+        System.out.println("--------------------------------------------------");
+        System.out.println("---Top 3 Solution Offers Broken Down By Markets---");
         for (Map.Entry<Market, ArrayList<SolutionOffer>> entry : business.getMarketChannelComboCatalog().getTop3SolutionsOfEachMarkets().entrySet()) {
             System.out.println("---Market: " + entry.getKey().getName() + "----");
             for (SolutionOffer so : entry.getValue()) {
@@ -52,13 +55,21 @@ public class SalesAnalyticsReport extends javax.swing.JPanel {
                 System.out.println("Solution Offer name: " + so.getName() + " Frequency of orders above target: " + so.getFrequencyAboveTarget());
             }
         }
+        System.out.println("--------------------------------------------------");
     }
 
     public void populateTable2() {
+        System.out.println("--------------------------------------------------");
+        System.out.println("---Top 3 Customers---");
         CustomersReport cr = business.getCustomerDirectory().generatCustomerPerformanceReport();
         ArrayList<CustomerSummary> sorted = cr.getSummariesSortedFrequencyAboveTarget();
 
+        int count = 0;
         for (CustomerSummary cs : sorted) {
+            if (count > 2) {
+                break;
+            }
+            count++;
             Object[] row = new Object[3];
             row[0] = cs.getCustomer().getCustomerId();
             row[1] = cs.getFrequencyOfSolutionOrdersAboveTarget();
@@ -66,13 +77,21 @@ public class SalesAnalyticsReport extends javax.swing.JPanel {
             ((DefaultTableModel) tbl2.getModel()).addRow(row);
             System.out.println("Customer ID: " + cs.getCustomer().getCustomerId() + " Solution Orders Above Target: " + cs.getFrequencyOfSolutionOrdersAboveTarget());
         }
+        System.out.println("--------------------------------------------------");
     }
 
     public void populateTable3() {
+        System.out.println("--------------------------------------------------");
+        System.out.println("---Top 3 Sales Persons---");
         SalesPersonsReport spr = business.getSalesPersonDirectory().generateSalesPersonsReport();
         ArrayList<SalesPersonSummary> sortedSales = spr.getSummariesSortedByFrequencyAboveTarget();
 
+        int count = 0;
         for (SalesPersonSummary ss : sortedSales) {
+            if (count > 2) {
+                break;
+            }
+            count++;
             Object[] row = new Object[3];
             row[0] = ss.getSalesPerson().getPerson().getPersonId();
             row[1] = ss.getFrequencyOfSolutionOrdersAboveTarget();
@@ -80,9 +99,12 @@ public class SalesAnalyticsReport extends javax.swing.JPanel {
             ((DefaultTableModel) tbl3.getModel()).addRow(row);
             System.out.println("SalesPerson ID:" + ss.getSalesPerson().getPerson().getPersonId() + " Solution Orders Above Target: " + ss.getFrequencyOfSolutionOrdersAboveTarget());
         }
+        System.out.println("--------------------------------------------------");
     }
 
     public void populateTable4() {
+        System.out.println("--------------------------------------------------");
+        System.out.println("---Marginal Revenue Broken Down By Markets---");
         Map<Integer, Market> map = business.getMarketChannelComboCatalog().getPricePerformanceOfEachMarkets();
 
         for (Map.Entry<Integer, Market> entry : map.entrySet()) {
@@ -92,10 +114,12 @@ public class SalesAnalyticsReport extends javax.swing.JPanel {
             ((DefaultTableModel) tbl4.getModel()).addRow(row);
             System.out.println("Market Name:" + entry.getValue().getName() + " Revenue: " + entry.getKey());
         }
+        System.out.println("--------------------------------------------------");
     }
 
     public void populateTable5overperforming() {
-        System.out.println("overperforming solutionoffers");
+        System.out.println("--------------------------------------------------");
+        System.out.println("---overperforming Solution Offers---");
         for (SolutionOffer so : business.getSolutionOfferCatalog().goodPerformingSolutionOffers()) {
             Object[] row = new Object[3];
             row[0] = so.getName();
@@ -104,10 +128,12 @@ public class SalesAnalyticsReport extends javax.swing.JPanel {
             ((DefaultTableModel) tbl5overperforming.getModel()).addRow(row);
             System.out.println("name: " + so.getName() + " target price: " + so.getTargetPrice() + " suggested price: " + so.getSuggestedPrice());
         }
+        System.out.println("--------------------------------------------------");
     }
 
     public void populateTable5underperforming() {
-        System.out.println("underperforming solutionoffers");
+        System.out.println("--------------------------------------------------");
+        System.out.println("---underperforming Solution Offers---");
         for (SolutionOffer so : business.getSolutionOfferCatalog().poorPerformingSolutionOffers()) {
             Object[] row = new Object[3];
             row[0] = so.getName();
@@ -116,6 +142,8 @@ public class SalesAnalyticsReport extends javax.swing.JPanel {
             ((DefaultTableModel) tbl5underperforming.getModel()).addRow(row);
             System.out.println("name: " + so.getName() + " target price: " + so.getTargetPrice() + " suggested price: " + so.getSuggestedPrice());
         }
+        System.out.println("--------------------------------------------------");
+        System.out.println("End of Sales Analytics Report");
     }
 
     /**
