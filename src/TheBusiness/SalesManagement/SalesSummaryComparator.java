@@ -14,15 +14,12 @@ public class SalesSummaryComparator implements Comparator<SalesPersonSummary> {
 
     @Override
     public int compare(SalesPersonSummary o1, SalesPersonSummary o2) {
-        if (o1.frequencyOfSolutionOrdersAboveTarget == o1.frequencyOfSolutionOrdersAboveTarget) {
-            return 0;
-        }
-        else if (o1.frequencyOfSolutionOrdersAboveTarget > o1.frequencyOfSolutionOrdersAboveTarget) {
-            return 1;
-        }
-        else {
+        if (o1.getFrequencyOfSolutionOrdersAboveTarget() == o2.getFrequencyOfSolutionOrdersAboveTarget()) 
+            return 0; 
+        else if (o1.getFrequencyOfSolutionOrdersAboveTarget() < o2.getFrequencyOfSolutionOrdersAboveTarget()) 
+            return 1; 
+        else
             return -1;
-        }
     }
     
 }

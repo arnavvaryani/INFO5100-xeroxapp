@@ -38,6 +38,14 @@ public class Market {
     public String getName() {
         return name;
     }
+
+    public ArrayList<Channel> getValidchannels() {
+        return validchannels;
+    }
     
+    @Override
+    public String toString() {
+        return name;
+    }
 
 }
