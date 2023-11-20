@@ -23,6 +23,15 @@ public class MarketCatalog {
 
     }
 
+    public Market findMarket(String name) {
+        for (Market m : markets) {
+            if (m.getName().equalsIgnoreCase(name)) {
+                return m;
+            }
+        }
+        return null;
+    }
+
     public Market newMarket(String m) {
 
         Market market = new Market(m);
@@ -33,5 +42,5 @@ public class MarketCatalog {
     public ArrayList<Market> getMarkets() {
         return markets;
     }
-    
+
 }
