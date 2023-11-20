@@ -57,7 +57,7 @@ public class ManageChannels extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Manage Channels");
+        jLabel1.setText("View Channels");
 
         tblChannels.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

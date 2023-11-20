@@ -50,7 +50,6 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
 
         btnManageMarkets = new javax.swing.JButton();
         btnManageChannels = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         btnSalesAnalyticsReport = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
@@ -61,7 +60,7 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
         btnManageMarkets.setBackground(new java.awt.Color(102, 153, 255));
         btnManageMarkets.setFont(getFont());
         btnManageMarkets.setForeground(new java.awt.Color(255, 255, 255));
-        btnManageMarkets.setText("Manage Markets");
+        btnManageMarkets.setText("View Markets");
         btnManageMarkets.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnManageMarkets.setMaximumSize(new java.awt.Dimension(200, 40));
         btnManageMarkets.setMinimumSize(new java.awt.Dimension(20, 23));
@@ -75,7 +74,7 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
         btnManageChannels.setBackground(new java.awt.Color(102, 153, 255));
         btnManageChannels.setFont(getFont());
         btnManageChannels.setForeground(new java.awt.Color(255, 255, 255));
-        btnManageChannels.setText("Manage Channels");
+        btnManageChannels.setText("View Channels");
         btnManageChannels.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnManageChannels.setMaximumSize(new java.awt.Dimension(200, 40));
         btnManageChannels.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -83,20 +82,6 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
         btnManageChannels.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageChannelsActionPerformed(evt);
-            }
-        });
-
-        jButton6.setBackground(new java.awt.Color(102, 153, 255));
-        jButton6.setFont(getFont());
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Manage Prices");
-        jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton6.setMaximumSize(new java.awt.Dimension(145, 40));
-        jButton6.setMinimumSize(new java.awt.Dimension(20, 20));
-        jButton6.setPreferredSize(new java.awt.Dimension(240, 25));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6IdentifyEventsActionPerformed(evt);
             }
         });
 
@@ -135,16 +120,12 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnManageMarkets, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(75, 75, 75)
-                                .addComponent(btnManageChannels, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSalesAnalyticsReport, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(496, Short.MAX_VALUE))
+                        .addComponent(btnManageMarkets, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnManageChannels, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(btnSalesAnalyticsReport, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(259, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -161,12 +142,9 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnManageMarkets, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManageChannels, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageChannels, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalesAnalyticsReport, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,15 +166,6 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnManageChannelsActionPerformed
 
-    private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
-        // TODO add your handling code here:
-        //    IdentifyEventTypes iet= new IdentifyEventTypes(businessunit, CardSequencePanel);
-
-        //    CardSequencePanel.add("IdentifyEventTypes", iet);
-//        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        //((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
-}//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
-
     private void btnSalesAnalyticsReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalesAnalyticsReportActionPerformed
         // TODO add your handling code here:
         SalesAnalyticsReport SAR = new SalesAnalyticsReport(business, CardSequencePanel);
@@ -216,7 +185,6 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
     private javax.swing.JButton btnManageChannels;
     private javax.swing.JButton btnManageMarkets;
     private javax.swing.JButton btnSalesAnalyticsReport;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
