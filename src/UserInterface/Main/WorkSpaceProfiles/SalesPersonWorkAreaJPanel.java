@@ -11,12 +11,17 @@
 package UserInterface.Main.WorkSpaceProfiles;
 
 import TheBusiness.Business.Business;
+import TheBusiness.CustomerManagement.CustomerDirectory;
 import TheBusiness.CustomerManagement.CustomerProfile;
+import TheBusiness.MarketModel.Channel;
+import TheBusiness.MarketModel.Market;
+import TheBusiness.Personnel.Person;
 import TheBusiness.SalesManagement.SalesPersonProfile;
 import UserInterface.Main.PricingMainFrame;
 import UserInterface.Main.WorkSpaceProfiles.OrderManagement.ManageSalesPersonOrders;
 import UserInterface.Main.WorkSpaceProfiles.OrderManagement.ProcessOrder;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -208,6 +213,20 @@ public class SalesPersonWorkAreaJPanel extends javax.swing.JPanel {
         if (customername.isEmpty()) return;
         CustomerProfile selectedcustomer = business.getCustomerDirectory().findCustomer(customername);
 
+        if(selectedcustomer == null) {
+            JOptionPane.showMessageDialog(this, "Customer doesn't exist. Create new customer.");
+            CustomerDirectory cd = business.getCustomerDirectory();
+            Person p = new Person(customername);
+            String c = JOptionPane.showInputDialog(this, "Enter Channel:", "New customer", JOptionPane.INFORMATION_MESSAGE);
+            String m = JOptionPane.showInputDialog(this, "Enter Market:", "New customer", JOptionPane.INFORMATION_MESSAGE);
+            
+            Channel channel = business.getChannelCatalog().findChannel(c);
+            Market market = business.getMarketCatalog().findMarket(m);
+            
+            cd.newCustomerProfile(p, channel, market);
+            return;
+        }
+        
         ProcessOrder aos = new ProcessOrder(business, selectedcustomer ,salesperson, CardSequencePanel);
 
         CardSequencePanel.add("ManageVulns", aos);

@@ -12,7 +12,6 @@ import TheBusiness.MarketModel.SolutionOffer;
 import TheBusiness.OrderManagement.MasterOrderList;
 import TheBusiness.SalesManagement.SalesPersonProfile;
 import TheBusiness.SolutionOrders.SolutionOrder;
-import TheBusiness.Supplier.Supplier;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,7 +28,6 @@ public class ProcessOrder extends javax.swing.JPanel {
      */
     JPanel CardSequencePanel;
     Business business;
-    Supplier selectedsupplier;
     SolutionOffer selectedSolOffer;
     SolutionOrder currentSolOrder;
     CustomerProfile customer;
