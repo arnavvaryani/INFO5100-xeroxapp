@@ -139,6 +139,7 @@ public class ManageSuppliersJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SuppliersComboBox.addActionListener(new java.awt.event.ActionListener() {

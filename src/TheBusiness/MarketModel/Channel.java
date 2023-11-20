@@ -10,15 +10,22 @@ package TheBusiness.MarketModel;
  * @author kal bugrara
  */
 public class Channel {
+
     String channeltype; //tv, internet, mobile app..
-    public Channel(String t){
+
+    public Channel(String t) {
         channeltype = t;
     }
-    public boolean isMatch(String t){
-        if (channeltype.equalsIgnoreCase(t))return true;
-        else return false;
+
+    public boolean isMatch(String t) {
+        if (channeltype.equalsIgnoreCase(t)) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    public String getChannelType( ){
+
+    public String getChannelType() {
         return channeltype;
     }
     
