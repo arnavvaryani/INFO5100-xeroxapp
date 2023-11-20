@@ -16,7 +16,7 @@ public class SummaryComparator implements Comparator<CustomerSummary> {
     public int compare(CustomerSummary o1, CustomerSummary o2) {
         if (o1.getFrequencyOfSolutionOrdersAboveTarget() == o2.getFrequencyOfSolutionOrdersAboveTarget()) 
             return 0; 
-        else if (o1.getSolutionOrderTotal() > o2.getCustomerPricePerformaceSolution()) 
+        else if (o1.getFrequencyOfSolutionOrdersAboveTarget() < o2.getFrequencyOfSolutionOrdersAboveTarget()) 
             return 1; 
         else
             return -1;
