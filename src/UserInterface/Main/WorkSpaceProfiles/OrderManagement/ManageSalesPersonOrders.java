@@ -47,10 +47,11 @@ public class ManageSalesPersonOrders extends javax.swing.JPanel {
         if (solorders.isEmpty()) return;
         
         for (SolutionOrder s : solorders) {
-            Object[] row = new Object[3];
+            Object[] row = new Object[4];
             row[0] = s;
             row[1] = s.getQuantity();
             row[2] = s.getCustomerProfile().getPerson().getPersonId();
+            row[3] = s.getStatus();
             
             ((DefaultTableModel) SalesOrderTable.getModel()).addRow(row);
         }
@@ -77,6 +78,7 @@ public class ManageSalesPersonOrders extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
 
         Back.setBackground(new java.awt.Color(255, 255, 255));
         Back.setForeground(new java.awt.Color(0, 0, 0));
@@ -92,11 +94,11 @@ public class ManageSalesPersonOrders extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order id", "Sales Volume", "Customer"
+                "Order id", "Sales Volume", "Customer", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

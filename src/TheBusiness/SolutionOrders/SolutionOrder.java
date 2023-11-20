@@ -25,6 +25,7 @@ public class SolutionOrder {
     int actualPrice;
     int quantity;
     String id;
+    String status = "Submiited";
 
     public SolutionOrder(CustomerProfile cp, SalesPersonProfile sp, SolutionOffer so, MarketChannelAssignment mca, int paidPrice, int q) {
         this.customerProfile = cp;
@@ -36,6 +37,14 @@ public class SolutionOrder {
         this.actualPrice = paidPrice;
         this.quantity = q;
         this.id = generateOrderID();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public SolutionOffer getSelectedsolutionoffer() {
@@ -101,5 +110,13 @@ public class SolutionOrder {
     
     public String toString() {
         return id;
+    }
+
+    public void CancelOrder() {
+        status = "Cancelled";
+    }
+
+    public void Submit() {
+        status = "Submitted";
     }
 }

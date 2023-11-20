@@ -71,6 +71,7 @@ public class ManageProductPerformanceDetail extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Back.setText("<< Back");

@@ -6,15 +6,15 @@ package UserInterface.Main.WorkSpaceProfiles.OrderManagement;
 
 import TheBusiness.Business.Business;
 import TheBusiness.CustomerManagement.CustomerProfile;
+import TheBusiness.MarketModel.MarketChannelAssignment;
+import TheBusiness.MarketModel.MarketChannelComboCatalog;
+import TheBusiness.MarketModel.SolutionOffer;
 import TheBusiness.OrderManagement.MasterOrderList;
-import TheBusiness.OrderManagement.Order;
-import TheBusiness.OrderManagement.OrderItem;
-import TheBusiness.ProductManagement.Product;
-import TheBusiness.ProductManagement.ProductCatalog;
-import TheBusiness.ProductManagement.ProductSummary;
 import TheBusiness.SalesManagement.SalesPersonProfile;
+import TheBusiness.SolutionOrders.SolutionOrder;
 import TheBusiness.Supplier.Supplier;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,8 +30,8 @@ public class ProcessOrder extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     Business business;
     Supplier selectedsupplier;
-    Product selectedproduct;
-    Order currentOrder;
+    SolutionOffer selectedSolOffer;
+    SolutionOrder currentSolOrder;
     CustomerProfile customer;
     SalesPersonProfile salesperson;
 
@@ -44,49 +44,55 @@ public class ProcessOrder extends javax.swing.JPanel {
         salesPersonTextField.setText(salesperson.getPerson().toString());
         customerTextField.setText(customer.getCustomerId());
         MasterOrderList mol = business.getMasterOrderList();
-        currentOrder = mol.newOrder(customer, salesperson); //no order was made yet
         initializeTable();
     }
 
     private void initializeTable() {
 
 //clear supplier table
-        cleanUpCombobox();
+//        cleanUpCombobox();
         cleanUpTable();
-
+        
+        MarketChannelComboCatalog mccc = business.getMarketChannelComboCatalog();
+        MarketChannelAssignment mca = mccc.findMarketChannelCombo(customer.getMarket(), customer.getChannel());
+        ArrayList<SolutionOffer> sol = mca.getSolutionofferlist();
+        
+        for (SolutionOffer s : sol) {
+            Object[] row = new Object[4];
+            row[0] = s;
+            row[1] = s.getFloorPrice();
+            row[2] = s.getCeilingPrice();
+            row[3] = s.getTargetPrice();
+            
+            ((DefaultTableModel) SupplierCatalogTable.getModel()).addRow(row);
+        }
+        
 //load suppliers to the combobox
-        ArrayList<Supplier> supplierlist = business.getSupplierDirectory().getSuplierList();
-
-        if (supplierlist.isEmpty()) {
-            return;
-        }
-
-        for (Supplier s : supplierlist) {
-
-            SuppliersComboBox.addItem(s.toString());
-            SuppliersComboBox.setSelectedIndex(0);
-            String suppliername = (String) SuppliersComboBox.getSelectedItem();
-            selectedsupplier = business.getSupplierDirectory().findSupplier(suppliername);
-            ProductCatalog pc = selectedsupplier.getProductCatalog();
-            for (Product pt : pc.getProductList()) {
-
-                Object[] row = new Object[5];
-                row[0] = pt;
-                row[1] = pt.getFloorPrice();
-                row[2] = pt.getCeilingPrice();
-                row[3] = pt.getTargetPrice();
-
-                ((DefaultTableModel) SupplierCatalogTable.getModel()).addRow(row);
-            }
-
-        }
-    }
-
-    public void cleanUpCombobox() {
-        //Clean the combobox for supplier choices
-
-        SuppliersComboBox.removeAllItems();
-
+//        ArrayList<Supplier> supplierlist = business.getSupplierDirectory().getSuplierList();
+//
+//        if (supplierlist.isEmpty()) {
+//            return;
+//        }
+//
+//        for (Supplier s : supplierlist) {
+//
+//            SuppliersComboBox.addItem(s.toString());
+//            SuppliersComboBox.setSelectedIndex(0);
+//            String suppliername = (String) SuppliersComboBox.getSelectedItem();
+//            selectedsupplier = business.getSupplierDirectory().findSupplier(suppliername);
+//            ProductCatalog pc = selectedsupplier.getProductCatalog();
+//            for (Product pt : pc.getProductList()) {
+//
+//                Object[] row = new Object[5];
+//                row[0] = pt;
+//                row[1] = pt.getFloorPrice();
+//                row[2] = pt.getCeilingPrice();
+//                row[3] = pt.getTargetPrice();
+//
+//                ((DefaultTableModel) SupplierCatalogTable.getModel()).addRow(row);
+//            }
+//
+//        }
     }
 
     public void cleanUpTable() {
@@ -109,37 +115,6 @@ public class ProcessOrder extends javax.swing.JPanel {
         }
     }
 
-    public void refreshSupplierProductCatalogTable() {
-
-//clear supplier table
-        int rc = SupplierCatalogTable.getRowCount();
-        int i;
-        for (i = rc - 1; i >= 0; i--) {
-            ((DefaultTableModel) SupplierCatalogTable.getModel()).removeRow(i);
-        }
-
-        String suppliername = (String) SuppliersComboBox.getSelectedItem();
-
-        selectedsupplier = business.getSupplierDirectory().findSupplier(suppliername);
-        if (selectedsupplier == null) {
-            return;
-        }
-        ProductCatalog pc = selectedsupplier.getProductCatalog();
-
-        for (Product pt : pc.getProductList()) {
-
-            Object[] row = new Object[5];
-            row[0] = pt;
-            row[1] = pt.getFloorPrice();
-            row[2] = pt.getCeilingPrice();
-            row[3] = pt.getTargetPrice();
-//                row[1] = pt.getPerformanceMeasure();
-//               row[2] = la.getName();
-            ((DefaultTableModel) SupplierCatalogTable.getModel()).addRow(row);
-        }
-
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,7 +128,6 @@ public class ProcessOrder extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         Back = new javax.swing.JButton();
         Next = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         SupplierCatalogTable = new javax.swing.JTable();
@@ -164,7 +138,6 @@ public class ProcessOrder extends javax.swing.JPanel {
         OrderItemsTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        SuppliersComboBox = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         customerTextField = new javax.swing.JTextField();
         salesPersonTextField = new javax.swing.JTextField();
@@ -180,9 +153,10 @@ public class ProcessOrder extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         productNameTextField = new javax.swing.JTextField();
+        btnBack = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
 
         Back.setText("X Cancel");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +164,6 @@ public class ProcessOrder extends javax.swing.JPanel {
                 BackActionPerformed(evt);
             }
         });
-        jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 90, -1));
 
         Next.setText("Submit");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -198,10 +171,6 @@ public class ProcessOrder extends javax.swing.JPanel {
                 NextActionPerformed(evt);
             }
         });
-        jPanel1.add(Next, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, 80, -1));
-
-        jLabel1.setText("Suppliers");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 60, -1));
 
         SupplierCatalogTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -234,26 +203,29 @@ public class ProcessOrder extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(jScrollPane3);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 600, 110));
-
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Prepare Order");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 550, -1));
 
-        jLabel8.setText("Product");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 20));
+        jLabel8.setText("Solution Offers");
 
         OrderItemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Product", "Actual price", "Quanity", "Item total"
+                "ID", "Actual price", "Quanity", "Above Target Price"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -271,10 +243,7 @@ public class ProcessOrder extends javax.swing.JPanel {
 
         jScrollPane4.setViewportView(jScrollPane5);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 600, 100));
-
-        jLabel9.setText("Order Items");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, 20));
+        jLabel9.setText("Solution Orders");
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -282,65 +251,182 @@ public class ProcessOrder extends javax.swing.JPanel {
                 jButton1AddProductItemActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 90, 30));
-
-        SuppliersComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SuppliersComboBoxActionPerformed(evt);
-            }
-        });
-        jPanel1.add(SuppliersComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 180, -1));
 
         jLabel10.setText("Customer");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 150, -1));
-        jPanel1.add(customerTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 160, -1));
-        jPanel1.add(salesPersonTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 160, -1));
 
         jLabel11.setText("Sales person");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 150, -1));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Business-wide Product Intelligence", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 14))); // NOI18N
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Business-wide SolutionOffer Intelligence", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 14))); // NOI18N
 
         jLabel6.setText("Frequency Below Target");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 150, -1));
-        jPanel2.add(productFrequencyBelowTargetTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 150, -1));
 
         jLabel4.setText("Frequency Above Target");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 150, -1));
-        jPanel2.add(productFrequencyAboveTargetTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 150, -1));
 
-        jLabel7.setText("Marign around target");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 150, -1));
+        jLabel7.setText("Margin around target");
 
         productPricePerformanceTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 productPricePerformanceTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(productPricePerformanceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 150, -1));
 
         productRevenueTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 productRevenueTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(productRevenueTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, -1));
 
         jLabel5.setText("Sales Revenues");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 110, -1));
 
-        jLabel3.setText("Product name");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 110, -1));
+        jLabel3.setText("Solution name");
 
         productNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 productNameTextFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(productNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 600, 170));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productRevenueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(productPricePerformanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productFrequencyAboveTargetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(productFrequencyBelowTargetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42))
+        );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6, jLabel7});
+
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(productNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productFrequencyAboveTargetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productFrequencyBelowTargetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(productRevenueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productPricePerformanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6, jLabel7});
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackAddProductItemActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(customerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(salesPersonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane4))
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(Next, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 270, Short.MAX_VALUE))))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Back, Next, jButton1});
+
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2))
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(customerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salesPersonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(Next)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Back))))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Back, Next, jButton1});
+
+        jPanel2.getAccessibleContext().setAccessibleName("Business-wide SolutionOffer Intelligence"); // NOI18N
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -358,14 +444,14 @@ public class ProcessOrder extends javax.swing.JPanel {
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
-        currentOrder.CancelOrder();
+        currentSolOrder.CancelOrder();
         CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_BackActionPerformed
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
-        currentOrder.Submit();
+        currentSolOrder.Submit();
         CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
@@ -383,19 +469,16 @@ public class ProcessOrder extends javax.swing.JPanel {
         if (selectedrow < 0 || selectedrow > suppliertablesize - 1) {
             return;
         }
-        selectedproduct = (Product) SupplierCatalogTable.getValueAt(selectedrow, 0);
-        if (selectedproduct == null) {
+        selectedSolOffer = (SolutionOffer) SupplierCatalogTable.getValueAt(selectedrow, 0);
+        if (selectedSolOffer == null) {
             return;
         }
 
-        ProductSummary productsummary = new ProductSummary(selectedproduct);
-
-        productNameTextField.setText(selectedproduct.toString());
-        String revenues = String.valueOf(productsummary.getSalesRevenues());
-        productRevenueTextField.setText(revenues);
-        productFrequencyAboveTargetTextField.setText(String.valueOf(productsummary.getNumberAboveTarget()));
-        productFrequencyBelowTargetTextField.setText(String.valueOf(productsummary.getNumberBelowTarget()));
-        productPricePerformanceTextField.setText(String.valueOf(productsummary.getProductPricePerformance()));
+        productNameTextField.setText(selectedSolOffer.toString());
+        productRevenueTextField.setText(String.valueOf(selectedSolOffer.getRevenues()));
+        productFrequencyAboveTargetTextField.setText(String.valueOf(selectedSolOffer.getFrequencyAboveTarget()));
+        productFrequencyBelowTargetTextField.setText(String.valueOf(selectedSolOffer.getFrequencyBelowTarget()));
+        productPricePerformanceTextField.setText(String.valueOf(selectedSolOffer.getSolutionOfferPricePerformance()));
     }//GEN-LAST:event_SupplierCatalogTableMousePressed
 
     private void OrderItemsTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderItemsTableMouseEntered
@@ -415,27 +498,25 @@ public class ProcessOrder extends javax.swing.JPanel {
         if (selectedrow < 0 || selectedrow > suppliertablesize - 1) {
             return;
         }
-        selectedproduct = (Product) SupplierCatalogTable.getValueAt(selectedrow, 0);
-        if (selectedproduct == null) {
+        selectedSolOffer = (SolutionOffer) SupplierCatalogTable.getValueAt(selectedrow, 0);
+        if (selectedSolOffer == null) {
             return;
         }
 
-        OrderItem item = currentOrder.newOrderItem(selectedproduct, 1000, 1);
-        Object[] row = new Object[5];
+        String actualprice = JOptionPane.showInputDialog(this, "Input the actual price", "Actual Price", JOptionPane.OK_OPTION);
+        String quantity = JOptionPane.showInputDialog(this, "Input the quantity", "Quantity", JOptionPane.OK_OPTION);
+        
+        currentSolOrder = new SolutionOrder(customer, salesperson, selectedSolOffer, selectedSolOffer.getMarketchannelcomb(), Integer.valueOf(actualprice), Integer.valueOf(quantity));
+        Object[] row = new Object[4];
 
-        row[0] = String.valueOf(item.getSelectedProduct());
-        row[1] = String.valueOf(item.getActualPrice());
-        row[2] = String.valueOf(item.getQuantity());
-        row[3] = String.valueOf(item.getOrderItemTotal());
+        row[0] = currentSolOrder;
+        row[1] = String.valueOf(currentSolOrder.getActualPrice());
+        row[2] = String.valueOf(currentSolOrder.getQuantity());
+        row[3] = currentSolOrder.isActualAboveTarget();
 
         ((DefaultTableModel) OrderItemsTable.getModel()).addRow(row);
 
     }//GEN-LAST:event_jButton1AddProductItemActionPerformed
-
-    private void SuppliersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuppliersComboBoxActionPerformed
-        // TODO add your handling code here:
-        refreshSupplierProductCatalogTable();
-    }//GEN-LAST:event_SuppliersComboBoxActionPerformed
 
     private void productPricePerformanceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productPricePerformanceTextFieldActionPerformed
         // TODO add your handling code here:
@@ -449,16 +530,21 @@ public class ProcessOrder extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_productNameTextFieldActionPerformed
 
+    private void btnBackAddProductItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackAddProductItemActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
+    }//GEN-LAST:event_btnBackAddProductItemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JButton Next;
     private javax.swing.JTable OrderItemsTable;
     private javax.swing.JTable SupplierCatalogTable;
-    private javax.swing.JComboBox<String> SuppliersComboBox;
+    private javax.swing.JButton btnBack;
     private javax.swing.JTextField customerTextField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
