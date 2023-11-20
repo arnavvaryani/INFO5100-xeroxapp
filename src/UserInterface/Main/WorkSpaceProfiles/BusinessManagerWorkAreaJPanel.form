@@ -67,7 +67,7 @@
                   <Component id="jButton6" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="btnSalesAnalyticsReport" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="349" max="32767" attributes="0"/>
+              <EmptySpace pref="330" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
